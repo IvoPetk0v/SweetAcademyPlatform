@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace SweetAcademy.Web.Data
+namespace SweetAcademy.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {

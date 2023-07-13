@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SweetAcademy.Web.Data;
 using System;
+using SweetAcademy.Data;
 
 namespace SweetAcademy.Web.Data.Migrations
 {

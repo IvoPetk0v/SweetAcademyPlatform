@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using SweetAcademy.Web.Data;
+using SweetAcademy.Data;
 
 namespace SweetAcademy.Web
 {
