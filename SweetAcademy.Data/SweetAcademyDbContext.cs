@@ -9,5 +9,6 @@ namespace SweetAcademy.Data
             : base(options)
         {
         }
+        
     }
 }

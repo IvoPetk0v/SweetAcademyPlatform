@@ -1,6 +1,6 @@
 ﻿namespace SweetAcademy.Common
 {
-    public class GeneralApplicationConstants
+    public static class GeneralApplicationConstants
     {
 
     }
