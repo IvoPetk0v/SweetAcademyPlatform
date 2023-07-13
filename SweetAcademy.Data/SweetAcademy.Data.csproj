@@ -15,4 +15,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SweetAcademy.Common\SweetAcademy.Common.csproj" />
+    <ProjectReference Include="..\SweetAcademy.Data.Models\SweetAcademy.Data.Models.csproj" />
+  </ItemGroup>
+
 </Project>

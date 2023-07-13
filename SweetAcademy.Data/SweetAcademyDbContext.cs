@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace SweetAcademy.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class SweetAcademyDbContext : IdentityDbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        public SweetAcademyDbContext(DbContextOptions<SweetAcademyDbContext> options)
             : base(options)
         {
         }

@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using SweetAcademy.Web.Models;
-using System.Diagnostics;
+﻿using System.Diagnostics;
+
+using Microsoft.AspNetCore.Mvc;
+
+using SweetAcademy.Web.ViewModels.Home;
 
 namespace SweetAcademy.Web.Controllers
 {

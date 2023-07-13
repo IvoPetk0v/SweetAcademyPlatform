@@ -10,7 +10,7 @@ using SweetAcademy.Data;
 
 namespace SweetAcademy.Web.Data.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
+    [DbContext(typeof(SweetAcademyDbContext))]
     [Migration("00000000000000_CreateIdentitySchema")]
     partial class CreateIdentitySchema
     {

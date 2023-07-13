@@ -1,4 +1,4 @@
-namespace SweetAcademy.Web.Models
+namespace SweetAcademy.Web.ViewModels.Home
 {
     public class ErrorViewModel
     {
