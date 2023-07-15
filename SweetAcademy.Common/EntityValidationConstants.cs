@@ -15,5 +15,12 @@
         //Training
         public const int TrainingNameMaxLength = 100;
         public const int TrainingNameMinLength = 10;
+
+        //Product
+        public const int ProductNameMaxLength = 500;
+        public const int ProductNameMinLength = 5;
+
+        public const int ProductUnitMaxLength = 6;
+        public const int ProductUnitMinLength = 1;
     }
 }

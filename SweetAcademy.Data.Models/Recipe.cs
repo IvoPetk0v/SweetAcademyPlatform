@@ -1,6 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json;
+
+using Newtonsoft.Json;
+
 using static SweetAcademy.Common.EntityValidationConstants;
 
 
@@ -10,7 +12,6 @@ namespace SweetAcademy.Data.Models
     {
         public Recipe()
         {
-            this.Products = new HashSet<Product>();
             this.Trainings = new HashSet<Training>();
             this.RecipeProducts = new HashSet<RecipeProduct>();
         }
@@ -31,14 +32,14 @@ namespace SweetAcademy.Data.Models
         public string StepsJson { get; set; } = null!;
 
         [NotMapped]
-        public ICollection<string> StepsCollection =>
-            JsonConvert.DeserializeObject
+        public ICollection<string> Steps =>
+            JsonConvert.DeserializeObject<ICollection<string>>(this.StepsJson);
 
         [Required]
-        public virtual ICollection<Product> Products { get; set; }
-
-        public virtual ICollection<Training>? Trainings { get; set; }
         public virtual ICollection<RecipeProduct> RecipeProducts { get; set; }
+        public virtual ICollection<Training>? Trainings { get; set; }
 
+        [Required]
+        public bool Active { get; set; } = true;
     }
 }
