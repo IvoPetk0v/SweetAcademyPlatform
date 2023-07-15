@@ -2,6 +2,10 @@
 
 namespace SweetAcademy.Data.Models
 {
+    /// <summary>
+    /// Custom user class working with default ASP.NET Core Identity.
+    /// There are collection for Orders and Trainings bought by the user.
+    /// </summary>
     public class ApplicationUser : IdentityUser<Guid>
     {
         public ApplicationUser()
