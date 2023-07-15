@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 using Newtonsoft.Json;
 
-using static SweetAcademy.Common.EntityValidationConstants;
+using static SweetAcademy.Common.EntityValidationConstants.Recipe;
 
 
 namespace SweetAcademy.Data.Models
@@ -20,15 +20,15 @@ namespace SweetAcademy.Data.Models
         public int Id { get; set; }
 
         [Required]
-        [MaxLength(RecipeNameMaxLength)]
+        [MaxLength(NameMaxLength)]
         public string Name { get; set; } = null!;
 
         [Required]
-        [MaxLength(RecipeDescriptionMaxLength)]
+        [MaxLength(DescriptionMaxLength)]
         public string Description { get; set; } = null!;
 
         [Required]
-        [MaxLength(RecipeStepsMaxLength)]
+        [MaxLength(StepsMaxLength)]
         public string StepsJson { get; set; } = null!;
 
         [NotMapped]
@@ -41,5 +41,8 @@ namespace SweetAcademy.Data.Models
 
         [Required]
         public bool Active { get; set; } = true;
+
+        [NotMapped]
+        public decimal TotalPrice => this.RecipeProducts.Sum(rp => rp.Product.Price);
     }
 }

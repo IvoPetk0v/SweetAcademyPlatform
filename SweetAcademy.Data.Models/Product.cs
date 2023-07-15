@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-using static SweetAcademy.Common.EntityValidationConstants;
+using static SweetAcademy.Common.EntityValidationConstants.Product;
+
 namespace SweetAcademy.Data.Models
 {
     public class Product
@@ -14,11 +15,11 @@ namespace SweetAcademy.Data.Models
         public int Id { get; set; }
 
         [Required]
-        [MaxLength(ProductNameMaxLength)]
+        [MaxLength(NameMaxLength)]
         public string Name { get; set; } = null!;
 
         [Required]
-        [MaxLength(ProductUnitMaxLength)]
+        [MaxLength(UnitMaxLength)]
         public string Unit { get; set; }= null!;
 
         [Required] 

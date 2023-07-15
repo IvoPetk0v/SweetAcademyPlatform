@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 using SweetAcademy.Data;
+using SweetAcademy.Data.Models;
 
 namespace SweetAcademy.Web
 {
@@ -17,7 +18,7 @@ namespace SweetAcademy.Web
             builder.Services.AddDbContext<SweetAcademyDbContext>(options =>
                 options.UseSqlServer(connectionString));
 
-            builder.Services.AddDefaultIdentity<IdentityUser>(options =>
+            builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
                 {
                     options.SignIn.RequireConfirmedAccount = false;
                 })
