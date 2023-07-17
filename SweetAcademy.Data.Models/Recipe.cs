@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 using Newtonsoft.Json;
@@ -40,9 +41,10 @@ namespace SweetAcademy.Data.Models
         public virtual ICollection<Training>? Trainings { get; set; }
 
         [Required]
-        public bool Active { get; set; } = true;
+        [DefaultValue(true)]
+        public bool Active { get; set; }
 
         [NotMapped]
-        public decimal TotalPrice => this.RecipeProducts.Sum(rp => rp.Product.Price);
+        public decimal TotalPrice => this.RecipeProducts.Sum(rp => rp.Product.PricePerPackage*rp.Quantity);
     }
 }

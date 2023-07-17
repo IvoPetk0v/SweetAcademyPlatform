@@ -1,4 +1,6 @@
-﻿namespace SweetAcademy.Common
+﻿using System.Reflection.Metadata;
+
+namespace SweetAcademy.Common
 {
     public static class EntityValidationConstants
     {
@@ -28,6 +30,11 @@
             public const int UnitMaxLength = 6;
             public const int UnitMinLength = 1;
         }
-       
+
+        public static class Chef
+        {
+            public const int FullNameMaxLength = 50;
+            public const int FullNameMinLength = 5;
+        }
     }
 }

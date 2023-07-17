@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SweetAcademy.Data;
 
@@ -11,9 +12,10 @@ using SweetAcademy.Data;
 namespace SweetAcademy.Data.Migrations
 {
     [DbContext(typeof(SweetAcademyDbContext))]
-    partial class SweetAcademyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230717171901_AddChefEntityAndExtendingEntities")]
+    partial class AddChefEntityAndExtendingEntities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -263,8 +265,7 @@ namespace SweetAcademy.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ApplicationUserId")
-                        .IsUnique();
+                    b.HasIndex("ApplicationUserId");
 
                     b.ToTable("Chef");
                 });
@@ -474,8 +475,8 @@ namespace SweetAcademy.Data.Migrations
             modelBuilder.Entity("SweetAcademy.Data.Models.Chef", b =>
                 {
                     b.HasOne("SweetAcademy.Data.Models.ApplicationUser", "User")
-                        .WithOne("Chef")
-                        .HasForeignKey("SweetAcademy.Data.Models.Chef", "ApplicationUserId")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -541,8 +542,6 @@ namespace SweetAcademy.Data.Migrations
 
             modelBuilder.Entity("SweetAcademy.Data.Models.ApplicationUser", b =>
                 {
-                    b.Navigation("Chef");
-
                     b.Navigation("Orders");
                 });
 

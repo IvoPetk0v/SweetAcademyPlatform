@@ -26,7 +26,7 @@ namespace SweetAcademy.Data.Models
         public ProductCategoryEnum Category { get; set; }
 
         [Required]
-        public decimal Price { get; set; } 
+        public decimal PricePerPackage { get; set; } 
 
         public virtual ICollection<RecipeProduct> RecipeProducts { get; set; }
     }

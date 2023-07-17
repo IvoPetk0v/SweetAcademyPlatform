@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SweetAcademy.Data.Models
 {
@@ -11,6 +12,7 @@ namespace SweetAcademy.Data.Models
         [ForeignKey(nameof(ProductId))]
         public virtual Product Product { get; set; }= null!;
 
-
+        [Required]
+        public int Quantity { get; set; }
     }
 }

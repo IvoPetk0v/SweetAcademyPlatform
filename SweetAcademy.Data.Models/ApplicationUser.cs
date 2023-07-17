@@ -15,5 +15,7 @@ namespace SweetAcademy.Data.Models
         }
         public virtual ICollection<Order>? Orders { get; set; }
         public virtual ICollection<Training>? Training { get; set; }
+
+        public virtual Chef? Chef { get; set; }
     }
 }
