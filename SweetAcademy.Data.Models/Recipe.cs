@@ -29,6 +29,10 @@ namespace SweetAcademy.Data.Models
         public string Description { get; set; } = null!;
 
         [Required]
+        [MaxLength(2048)]
+        public string ImageUrl { get; set; } = null!;
+
+        [Required]
         [MaxLength(StepsMaxLength)]
         public string StepsJson { get; set; } = null!;
 
@@ -45,6 +49,7 @@ namespace SweetAcademy.Data.Models
         public bool Active { get; set; }
 
         [NotMapped]
-        public decimal TotalPrice => this.RecipeProducts.Sum(rp => rp.Product.PricePerPackage*rp.Quantity);
+        public decimal TotalPrice => this.RecipeProducts
+            .Sum(rp => rp.Product.PricePerPackage * (decimal)rp.Quantity);
     }
 }

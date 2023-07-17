@@ -14,6 +14,9 @@ namespace SweetAcademy.Common
 
             public const int StepsMaxLength = 10000;
             public const int StepsMinLength = 30;
+
+            public const int ImageUrlMaxLength = 2048;
+            public const int ImageUrlMinLength = 10;
         }
 
         public static class Training
@@ -29,12 +32,20 @@ namespace SweetAcademy.Common
 
             public const int UnitMaxLength = 6;
             public const int UnitMinLength = 1;
+
+            public const int CategoryMaxValue = 5;    // must be last index of ProductCategoryEnum !!
+            public const int CategoryMinLength = 0;
         }
 
         public static class Chef
         {
             public const int FullNameMaxLength = 50;
             public const int FullNameMinLength = 5;
+
+            public const decimal TaxPerTrainingForStudentMinValue = 0.00m;
+            public const decimal TaxPerTrainingForStudentMaxValue = 10000.00m;
+
+            public const int PhoneNumMaxValue = 0999999999;
         }
     }
 }

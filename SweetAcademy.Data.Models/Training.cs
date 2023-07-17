@@ -29,17 +29,17 @@ namespace SweetAcademy.Data.Models
 
         [ForeignKey(nameof(RecipeId))] 
         public virtual Recipe Recipe { get; set; } = null!;
-
-        public virtual ICollection<ApplicationUser> Participators { get; set; } = null!;
+        public virtual ICollection<ApplicationUser> Participators { get; set; } =null!;
 
         [Required]
         [DefaultValue(true)]
         public bool Active { get; set; } 
+
         [Required]
         public Guid ChefId { get; set; }
 
         [Required]
         [ForeignKey(nameof(ChefId))]
-        public virtual Chef Trainer { get; set; }
+        public virtual Chef Trainer { get; set; }=null!;
     }
 }
