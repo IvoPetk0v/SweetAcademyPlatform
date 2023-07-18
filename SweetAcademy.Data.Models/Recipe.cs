@@ -29,7 +29,7 @@ namespace SweetAcademy.Data.Models
         public string Description { get; set; } = null!;
 
         [Required]
-        [MaxLength(2048)]
+        [MaxLength(ImageUrlMaxLength)]
         public string ImageUrl { get; set; } = null!;
 
         [Required]
