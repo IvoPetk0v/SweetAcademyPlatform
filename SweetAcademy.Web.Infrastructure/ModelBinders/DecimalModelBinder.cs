@@ -1,9 +1,8 @@
-﻿namespace HouseRentingSystem.Web.Infrastructure.ModelBinders
+﻿using System.Globalization;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+
+namespace SweetAcademy.Web.Infrastructure.ModelBinders
 {
-    using System.Globalization;
-
-    using Microsoft.AspNetCore.Mvc.ModelBinding;
-
     public class DecimalModelBinder : IModelBinder
     {
         public Task BindModelAsync(ModelBindingContext? bindingContext)

@@ -1,6 +1,8 @@
-﻿namespace SweetAcademy.Services.Data
+﻿using SweetAcademy.Services.Data.Interfaces;
+
+namespace SweetAcademy.Services.Data
 {
-    public class ProductService
+    public class ProductService : IProductService
     {
 
     }

@@ -1,9 +1,8 @@
-﻿namespace HouseRentingSystem.Web.Infrastructure.Extensions
+﻿using System.Reflection;
+using Microsoft.Extensions.DependencyInjection;
+
+namespace SweetAcademy.Web.Infrastructure.Extensions
 {
-    using System.Reflection;
-
-    using Microsoft.Extensions.DependencyInjection;
-
     public static class WebApplicationBuilderExtensions
     {
         /// <summary>

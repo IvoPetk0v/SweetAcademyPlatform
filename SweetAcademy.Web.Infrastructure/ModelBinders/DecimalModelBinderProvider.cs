@@ -1,7 +1,7 @@
-﻿namespace HouseRentingSystem.Web.Infrastructure.ModelBinders
-{
-    using Microsoft.AspNetCore.Mvc.ModelBinding;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
 
+namespace SweetAcademy.Web.Infrastructure.ModelBinders
+{
     public class DecimalModelBinderProvider : IModelBinderProvider
     {
         public IModelBinder GetBinder(ModelBinderProviderContext context)

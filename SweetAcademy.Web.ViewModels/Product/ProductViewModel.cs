@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-using SweetAcademy.Data.Models;
 using static SweetAcademy.Common.EntityValidationConstants.Product;
 
 namespace SweetAcademy.Web.ViewModels.Product
@@ -9,7 +8,7 @@ namespace SweetAcademy.Web.ViewModels.Product
     {
         public ProductViewModel()
         {
-            this.RecipeProducts = new HashSet<RecipeProduct>();
+            this.Products = new HashSet<string>();
         }
         public int Id { get; set; }
 
@@ -29,6 +28,6 @@ namespace SweetAcademy.Web.ViewModels.Product
         [Range(0, 9999)]
         public decimal PricePerPackage { get; set; }
 
-        public virtual ICollection<RecipeProduct> RecipeProducts { get; set; }
+        public virtual ICollection<string> Products { get; set; }
     }
 }

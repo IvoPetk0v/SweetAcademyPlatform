@@ -4,7 +4,9 @@ using Microsoft.EntityFrameworkCore;
 
 using SweetAcademy.Data;
 using SweetAcademy.Data.Models;
+using SweetAcademy.Services.Data.Interfaces;
 using SweetAcademy.Web.Infrastructure.Extensions;
+using SweetAcademy.Web.Infrastructure.ModelBinders;
 
 namespace SweetAcademy.Web
 {
@@ -38,9 +40,15 @@ namespace SweetAcademy.Web
                         .GetValue<int>("Identity:Password:RequiredLength");
                 })
                 .AddEntityFrameworkStores<SweetAcademyDbContext>();
-            builder.Services.AddApplicationServices(typeof(I);
 
-            builder.Services.AddControllersWithViews();
+            builder.Services.AddApplicationServices(typeof(IProductService));
+
+            builder.Services
+                .AddControllersWithViews()
+                .AddMvcOptions(options =>
+                {
+                    options.ModelBinderProviders.Insert(0, new DecimalModelBinderProvider());
+                });
 
             var app = builder.Build();
 
