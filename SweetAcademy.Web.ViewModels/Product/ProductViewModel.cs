@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+
 using SweetAcademy.Data.Models;
 using static SweetAcademy.Common.EntityValidationConstants.Product;
 

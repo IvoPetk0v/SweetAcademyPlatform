@@ -3,19 +3,25 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SweetAcademy.Web", "SweetAcademy.Web\SweetAcademy.Web.csproj", "{D68B3428-99F6-41BC-B1CC-C73B5ACC4F01}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SweetAcademy.Web", "SweetAcademy.Web\SweetAcademy.Web.csproj", "{D68B3428-99F6-41BC-B1CC-C73B5ACC4F01}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{E2B906C8-7D37-48CC-BBCE-9664EA40CF56}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{D93893CA-B46B-4715-A801-EFEF37D3F242}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SweetAcademy.Data", "SweetAcademy.Data\SweetAcademy.Data.csproj", "{4B7A1CDB-298A-47A5-8264-EF416D75E1FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SweetAcademy.Data", "SweetAcademy.Data\SweetAcademy.Data.csproj", "{4B7A1CDB-298A-47A5-8264-EF416D75E1FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SweetAcademy.Data.Models", "SweetAcademy.Data.Models\SweetAcademy.Data.Models.csproj", "{5E5DFB64-C3BE-4693-B7E7-B88FB57E2C34}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SweetAcademy.Data.Models", "SweetAcademy.Data.Models\SweetAcademy.Data.Models.csproj", "{5E5DFB64-C3BE-4693-B7E7-B88FB57E2C34}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SweetAcademy.Web.ViewModels", "SweetAcademy.Web.ViewModels\SweetAcademy.Web.ViewModels.csproj", "{3C6FF6A9-B66E-4751-B7EF-271FB4E9B52A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SweetAcademy.Web.ViewModels", "SweetAcademy.Web.ViewModels\SweetAcademy.Web.ViewModels.csproj", "{3C6FF6A9-B66E-4751-B7EF-271FB4E9B52A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SweetAcademy.Common", "SweetAcademy.Common\SweetAcademy.Common.csproj", "{057C6ABD-752C-43C3-9568-45BB101C7464}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SweetAcademy.Common", "SweetAcademy.Common\SweetAcademy.Common.csproj", "{057C6ABD-752C-43C3-9568-45BB101C7464}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SweetAcademy.Web.Infrastructure", "SweetAcademy.Web.Infrastructure\SweetAcademy.Web.Infrastructure.csproj", "{13ACBD83-BF8B-4ACD-A82A-8957E6031A46}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{023D4D1E-E158-4BC5-97AF-4C1A7800515C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SweetAcademy.Services.Data", "SweetAcademy.Services.Data\SweetAcademy.Services.Data.csproj", "{D6220235-DD29-4777-B097-2CED77BAE711}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +49,14 @@ Global
 		{057C6ABD-752C-43C3-9568-45BB101C7464}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{057C6ABD-752C-43C3-9568-45BB101C7464}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{057C6ABD-752C-43C3-9568-45BB101C7464}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13ACBD83-BF8B-4ACD-A82A-8957E6031A46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13ACBD83-BF8B-4ACD-A82A-8957E6031A46}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13ACBD83-BF8B-4ACD-A82A-8957E6031A46}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13ACBD83-BF8B-4ACD-A82A-8957E6031A46}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6220235-DD29-4777-B097-2CED77BAE711}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6220235-DD29-4777-B097-2CED77BAE711}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6220235-DD29-4777-B097-2CED77BAE711}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6220235-DD29-4777-B097-2CED77BAE711}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -52,6 +66,8 @@ Global
 		{4B7A1CDB-298A-47A5-8264-EF416D75E1FA} = {D93893CA-B46B-4715-A801-EFEF37D3F242}
 		{5E5DFB64-C3BE-4693-B7E7-B88FB57E2C34} = {D93893CA-B46B-4715-A801-EFEF37D3F242}
 		{3C6FF6A9-B66E-4751-B7EF-271FB4E9B52A} = {E2B906C8-7D37-48CC-BBCE-9664EA40CF56}
+		{13ACBD83-BF8B-4ACD-A82A-8957E6031A46} = {E2B906C8-7D37-48CC-BBCE-9664EA40CF56}
+		{D6220235-DD29-4777-B097-2CED77BAE711} = {023D4D1E-E158-4BC5-97AF-4C1A7800515C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FDE95933-9587-49F5-8F02-7C67C70135AF}

@@ -21,7 +21,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SweetAcademy.Common\SweetAcademy.Common.csproj" />
+    <ProjectReference Include="..\SweetAcademy.Data.Models\SweetAcademy.Data.Models.csproj" />
     <ProjectReference Include="..\SweetAcademy.Data\SweetAcademy.Data.csproj" />
+    <ProjectReference Include="..\SweetAcademy.Services.Data\SweetAcademy.Services.Data.csproj" />
+    <ProjectReference Include="..\SweetAcademy.Web.Infrastructure\SweetAcademy.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\SweetAcademy.Web.ViewModels\SweetAcademy.Web.ViewModels.csproj" />
   </ItemGroup>
 
