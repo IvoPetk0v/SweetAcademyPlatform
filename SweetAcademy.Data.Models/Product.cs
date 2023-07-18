@@ -21,10 +21,7 @@ namespace SweetAcademy.Data.Models
         [Required]
         [MaxLength(UnitMaxLength)]
         public string Unit { get; set; }= null!;
-
-        [Required] 
-        public ProductCategoryEnum Category { get; set; }
-
+        
         [Required]
         public decimal PricePerPackage { get; set; } 
 

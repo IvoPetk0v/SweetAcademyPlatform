@@ -33,8 +33,6 @@ namespace SweetAcademy.Common
             public const int UnitMaxLength = 6;
             public const int UnitMinLength = 1;
 
-            public const int CategoryMaxValue = 5;    // must be last index of ProductCategoryEnum !!
-            public const int CategoryMinLength = 0;
         }
 
         public static class Chef

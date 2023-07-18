@@ -1,0 +1,70 @@
+﻿@model ICollection<ProductViewModel>
+
+@{
+    ViewData["Title"] = "Add Products";
+}
+
+<form asp-action="AddProducts" method="post">
+    <div class="page-content page-container" id="page-content">
+        <div class="padding">
+            <div class="row container d-flex justify-content-center">
+                <div class="col-lg-8 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title text-center">Add and remove products for recipes in table before submit </h4>
+                            <hr>
+
+                            <div class="table-responsive">
+                                <table id="faqs" class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Products</th>
+                                            <th>Price per package</th>
+                                            <th>Measurement unit</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><input type="text" placeholder="Product name" class="form-control"></td>
+                                            <td><input type="number" placeholder="Price per package" class="form-control"></td>
+                                            <td><input type="text" placeholder="Unit" class="form-control"></td>
+                                            <td class="mt-10"><button type="button" class="btn btn-danger"><i class="fa fa-trash"></i> Delete</button></td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="text-center" class="btn-toolbar">
+                                <button type="button" onclick="addfaqs();" class="btn btn-primary"><i class="fa fa-plus"></i>Add new product</button>
+                                <input class="btn btn-warning" type="submit" value="Submit Products table" />
+                            </div>
+                            <div class="text-center">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
+<script>
+    var faqs_row = 0;
+    function addfaqs(event) {
+
+        html = '<tr id="faqs-row' + faqs_row + '">';
+
+        html += '<td><input type="text" placeholder="Product name" class="form-control" ></td>';
+        html += '<td><input type="number" placeholder="Price per package" class="form-control"></td>';
+        html += '<td><input type="text" placeholder="Unit" class="form-control"></td>';
+
+        html += '<td class="mt-10"><button type="button" class="btn btn-danger" onclick="$(\'#faqs-row' + faqs_row + '\').remove();"><i class="fa fa-trash"></i> Delete</button></td>';
+
+        html += '</tr>';
+
+        $('#faqs tbody').append(html);
+
+        faqs_row++;
+    }
+</script>

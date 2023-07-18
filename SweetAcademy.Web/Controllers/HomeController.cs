@@ -1,12 +1,12 @@
 ﻿using System.Diagnostics;
-
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 using SweetAcademy.Web.ViewModels.Home;
 
 namespace SweetAcademy.Web.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         private readonly ILogger<HomeController> _logger;
 
@@ -15,6 +15,7 @@ namespace SweetAcademy.Web.Controllers
             _logger = logger;
         }
 
+        [AllowAnonymous]
         public IActionResult Index()
         {
             return View();
