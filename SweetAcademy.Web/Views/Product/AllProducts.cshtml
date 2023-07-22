@@ -12,9 +12,6 @@
     {
         <div class="card col-4" style="width: 20rem; ">
             <div class="card-body">
-                <form class="input-group-sm" asp-controller="Product" asp-action="Delete" asp-route-id="@product.Id">
-                    <input type="submit" value="Delete product" class="fs-6 btn-sm btn-danger " />
-                </form>
                 <h5 class="card-title mt-1">@product.Name</h5>
                 <p class="mb-0"> Measurement Unit: @product.Unit</p>
                 <p class="mb-0">Price per package: @product.Price BGN</p>
@@ -24,7 +21,9 @@
                     <input type="submit" value="Edit product" class="fs-6 btn-sm btn-success " />
                 </form>
                 <hr />
-               
+                <form class="input-group-sm" asp-controller="Product" asp-action="Delete" asp-route-id="@product.Id">
+                    <input type="submit" value="Delete product" class="fs-6 btn-xs btn-danger " />
+                </form>
                 <br />
             </div>
         </div>
