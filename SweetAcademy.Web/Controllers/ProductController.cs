@@ -22,6 +22,10 @@ namespace SweetAcademy.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> AddProducts(ProductViewModel model)
         {
+            if (ModelState.IsValid == false)
+            {
+                return View(model);
+            }
             try
             {
                 await productService.AddProductAsync(model);
@@ -43,6 +47,7 @@ namespace SweetAcademy.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
+
             try
             {
                 await productService.DeleteProductById(id);
@@ -53,6 +58,24 @@ namespace SweetAcademy.Web.Controllers
             }
             return RedirectToAction("AllProducts");
 
+        }
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            var model = await productService.GetProductById(id);
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, ProductViewModel model)
+        {
+            if (ModelState.IsValid == false)
+            {
+                return View(model);
+            }
+
+            await productService.EditProduct(id, model);
+            return RedirectToAction("AllProducts");
         }
     }
 }

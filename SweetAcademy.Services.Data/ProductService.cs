@@ -60,7 +60,28 @@ namespace SweetAcademy.Services.Data
 
             dbContext.Products.Remove(dbContext.Products.First(p => p.Id == id));
             await dbContext.SaveChangesAsync();
-            return;
+        }
+
+        public async Task<ProductViewModel> GetProductById(int id)
+        {
+            var product = await dbContext.Products.FirstAsync(p => p.Id == id);
+            return new ProductViewModel()
+            {
+                Id = product.Id,
+                Name = product.Name,
+                Unit = product.Unit,
+                Price = product.Price
+            };
+        }
+
+        public async Task EditProduct(int id, ProductViewModel model)
+        {
+            var product = await dbContext.Products.FirstAsync(p => p.Id == id);
+            product.Name = model.Name;
+            product.Unit = model.Unit;
+            product.Price = model.Price;
+
+            await dbContext.SaveChangesAsync();
         }
     }
 }
