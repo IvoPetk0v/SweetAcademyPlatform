@@ -34,7 +34,7 @@ namespace SweetAcademy.Data.Migrations
 
                     b.HasIndex("TrainingId");
 
-                    b.ToTable("ApplicationUserTraining");
+                    b.ToTable("ApplicationUserTraining", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", b =>
@@ -266,7 +266,7 @@ namespace SweetAcademy.Data.Migrations
                     b.HasIndex("ApplicationUserId")
                         .IsUnique();
 
-                    b.ToTable("Chef");
+                    b.ToTable("Chef", (string)null);
                 });
 
             modelBuilder.Entity("SweetAcademy.Data.Models.Order", b =>
@@ -287,7 +287,7 @@ namespace SweetAcademy.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Orders", (string)null);
                 });
 
             modelBuilder.Entity("SweetAcademy.Data.Models.Product", b =>
@@ -303,7 +303,8 @@ namespace SweetAcademy.Data.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
-                    b.Property<decimal>("PricePerPackage")
+                    b.Property<decimal>("Price")
+                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Unit")
@@ -313,7 +314,7 @@ namespace SweetAcademy.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("SweetAcademy.Data.Models.Recipe", b =>
@@ -349,7 +350,7 @@ namespace SweetAcademy.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Recipes");
+                    b.ToTable("Recipes", (string)null);
                 });
 
             modelBuilder.Entity("SweetAcademy.Data.Models.RecipeProduct", b =>
@@ -367,7 +368,7 @@ namespace SweetAcademy.Data.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("RecipesProducts");
+                    b.ToTable("RecipesProducts", (string)null);
                 });
 
             modelBuilder.Entity("SweetAcademy.Data.Models.Training", b =>
@@ -404,7 +405,7 @@ namespace SweetAcademy.Data.Migrations
 
                     b.HasIndex("RecipeId");
 
-                    b.ToTable("Trainings");
+                    b.ToTable("Trainings", (string)null);
                 });
 
             modelBuilder.Entity("ApplicationUserTraining", b =>

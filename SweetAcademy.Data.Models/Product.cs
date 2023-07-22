@@ -23,7 +23,8 @@ namespace SweetAcademy.Data.Models
         public string Unit { get; set; }= null!;
         
         [Required]
-        public decimal PricePerPackage { get; set; } 
+        
+        public decimal Price { get; set; } 
 
         public virtual ICollection<RecipeProduct> RecipeProducts { get; set; }
     }

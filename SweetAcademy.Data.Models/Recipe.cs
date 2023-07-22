@@ -50,6 +50,6 @@ namespace SweetAcademy.Data.Models
 
         [NotMapped]
         public decimal TotalPrice => this.RecipeProducts
-            .Sum(rp => rp.Product.PricePerPackage * (decimal)rp.Quantity);
+            .Sum(rp => rp.Product.Price * (decimal)rp.Quantity);
     }
 }

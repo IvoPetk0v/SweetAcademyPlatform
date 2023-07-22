@@ -12,8 +12,8 @@ using SweetAcademy.Data;
 namespace SweetAcademy.Data.Migrations
 {
     [DbContext(typeof(SweetAcademyDbContext))]
-    [Migration("20230715141953_addDbSets")]
-    partial class addDbSets
+    [Migration("20230722104038_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -240,6 +240,37 @@ namespace SweetAcademy.Data.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("SweetAcademy.Data.Models.Chef", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("ApplicationUserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int>("PhoneNumber")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("TaxPerTrainingForStudent")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId")
+                        .IsUnique();
+
+                    b.ToTable("Chef");
+                });
+
             modelBuilder.Entity("SweetAcademy.Data.Models.Order", b =>
                 {
                     b.Property<Guid>("Id")
@@ -269,15 +300,13 @@ namespace SweetAcademy.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("Category")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
                     b.Property<decimal>("Price")
+                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Unit")
@@ -306,6 +335,11 @@ namespace SweetAcademy.Data.Migrations
                         .HasMaxLength(5000)
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasMaxLength(2048)
+                        .HasColumnType("nvarchar(2048)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -329,6 +363,9 @@ namespace SweetAcademy.Data.Migrations
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
                     b.HasKey("RecipeId", "ProductId");
 
                     b.HasIndex("ProductId");
@@ -347,6 +384,9 @@ namespace SweetAcademy.Data.Migrations
                     b.Property<bool>("Active")
                         .HasColumnType("bit");
 
+                    b.Property<Guid>("ChefId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -362,6 +402,8 @@ namespace SweetAcademy.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ChefId");
 
                     b.HasIndex("RecipeId");
 
@@ -434,6 +476,17 @@ namespace SweetAcademy.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("SweetAcademy.Data.Models.Chef", b =>
+                {
+                    b.HasOne("SweetAcademy.Data.Models.ApplicationUser", "User")
+                        .WithOne("Chef")
+                        .HasForeignKey("SweetAcademy.Data.Models.Chef", "ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("SweetAcademy.Data.Models.Order", b =>
                 {
                     b.HasOne("SweetAcademy.Data.Models.Training", "OrderedTraining")
@@ -474,6 +527,12 @@ namespace SweetAcademy.Data.Migrations
 
             modelBuilder.Entity("SweetAcademy.Data.Models.Training", b =>
                 {
+                    b.HasOne("SweetAcademy.Data.Models.Chef", "Trainer")
+                        .WithMany("CouchingSession")
+                        .HasForeignKey("ChefId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("SweetAcademy.Data.Models.Recipe", "Recipe")
                         .WithMany("Trainings")
                         .HasForeignKey("RecipeId")
@@ -481,11 +540,20 @@ namespace SweetAcademy.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Recipe");
+
+                    b.Navigation("Trainer");
                 });
 
             modelBuilder.Entity("SweetAcademy.Data.Models.ApplicationUser", b =>
                 {
+                    b.Navigation("Chef");
+
                     b.Navigation("Orders");
+                });
+
+            modelBuilder.Entity("SweetAcademy.Data.Models.Chef", b =>
+                {
+                    b.Navigation("CouchingSession");
                 });
 
             modelBuilder.Entity("SweetAcademy.Data.Models.Product", b =>
