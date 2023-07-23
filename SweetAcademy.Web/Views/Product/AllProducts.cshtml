@@ -21,7 +21,8 @@
                     <input type="submit" value="Edit product" class="fs-6 btn-sm btn-success " />
                 </form>
                 <hr />
-                <form class="input-group-sm" asp-controller="Product" asp-action="Delete" asp-route-id="@product.Id">
+                <form class="input-group-sm" asp-controller="Product" asp-action="Delete" asp-route-id="@product.Id"
+                      onsubmit="return confirm('Do you really want to delete the product?');">
                     <input type="submit" value="Delete product" class="fs-6 btn-xs btn-danger " />
                 </form>
                 <br />
@@ -29,3 +30,5 @@
         </div>
     }
 </div>
+
+        

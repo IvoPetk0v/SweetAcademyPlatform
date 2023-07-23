@@ -30,7 +30,7 @@ namespace SweetAcademy.Common
             public const int NameMaxLength = 500;
             public const int NameMinLength = 5;
 
-            public const int UnitMaxLength = 6;
+            public const int UnitMaxLength = 15;
             public const int UnitMinLength = 1;
 
         }
