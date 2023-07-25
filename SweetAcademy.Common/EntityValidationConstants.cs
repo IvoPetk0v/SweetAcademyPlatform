@@ -1,6 +1,4 @@
-﻿using System.Reflection.Metadata;
-
-namespace SweetAcademy.Common
+﻿namespace SweetAcademy.Common
 {
     public static class EntityValidationConstants
     {

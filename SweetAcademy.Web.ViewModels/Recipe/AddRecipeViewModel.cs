@@ -6,10 +6,10 @@ namespace SweetAcademy.Web.ViewModels.Recipe
     public class AddRecipeViewModel
     {
 
-        public AddRecipeViewModel()
-        {
-            this.Products = new Dictionary<string, int>();
-        }
+        //public AddRecipeViewModel()
+        //{
+        //    this.Products = new Dictionary<string, int>();
+        //}
 
         [Required]
         [StringLength(NameMaxLength, MinimumLength = NameMinLength)]
@@ -27,25 +27,25 @@ namespace SweetAcademy.Web.ViewModels.Recipe
         [StringLength(StepsMaxLength, MinimumLength = StepsMinLength)]
         public string StepsJson { get; set; } = null!;
 
-        [Required]
-        public Dictionary<string, int> Products
-        {
-            get => Products;
-            set
-            {
-                if (value.Count == 0)
-                {
-                    throw new NullReferenceException(message: "Product list can`t be empty");
-                }
-                if (value.Values.Any(v => v <= 0))
-                {
-                    throw new ArgumentException(message: "Products quantities must be greater than 0");
-                }
+        //[Required]
+        //public Dictionary<int, int> Products
+        //{
+        //    get => Products;
+        //    set
+        //    {
+        //        if (value.Count == 0)
+        //        {
+        //            throw new NullReferenceException(message: "Product list can`t be empty");
+        //        }
+        //        if (value.Values.Any(v => v <= 0))
+        //        {
+        //            throw new ArgumentException(message: "Products quantities must be greater than 0");
+        //        }
 
-                this.Products = value;
+        //        this.Products = value;
 
-            }
-        }
+        //    }
+        //}
     }
 }
 
