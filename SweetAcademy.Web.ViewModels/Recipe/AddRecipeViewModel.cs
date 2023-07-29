@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using SweetAcademy.Web.ViewModels.Product;
 using static SweetAcademy.Common.EntityValidationConstants.Recipe;
 
 namespace SweetAcademy.Web.ViewModels.Recipe
@@ -6,10 +7,10 @@ namespace SweetAcademy.Web.ViewModels.Recipe
     public class AddRecipeViewModel
     {
 
-        //public AddRecipeViewModel()
-        //{
-        //    this.Products = new Dictionary<string, int>();
-        //}
+        public AddRecipeViewModel()
+        {
+            this.Products = new List<ProductViewModel>();
+        }
 
         [Required]
         [StringLength(NameMaxLength, MinimumLength = NameMinLength)]
@@ -27,25 +28,8 @@ namespace SweetAcademy.Web.ViewModels.Recipe
         [StringLength(StepsMaxLength, MinimumLength = StepsMinLength)]
         public string StepsJson { get; set; } = null!;
 
-        //[Required]
-        //public Dictionary<int, int> Products
-        //{
-        //    get => Products;
-        //    set
-        //    {
-        //        if (value.Count == 0)
-        //        {
-        //            throw new NullReferenceException(message: "Product list can`t be empty");
-        //        }
-        //        if (value.Values.Any(v => v <= 0))
-        //        {
-        //            throw new ArgumentException(message: "Products quantities must be greater than 0");
-        //        }
-
-        //        this.Products = value;
-
-        //    }
-        //}
+        [Required]
+        public ICollection<ProductViewModel> Products { get; set; }
     }
 }
 

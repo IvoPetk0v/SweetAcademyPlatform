@@ -20,5 +20,7 @@ namespace SweetAcademy.Web.ViewModels.Product
         [Range(0.00, 9999.99)]
         public decimal Price { get; set; }
 
+        public int? Quantity { get; set; }
+
     }
 }

@@ -1,20 +1,33 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+
+using SweetAcademy.Services.Data.Interfaces;
 using SweetAcademy.Web.ViewModels.Recipe;
 
 namespace SweetAcademy.Web.Controllers
 {
     public class RecipeController : BaseController
     {
-        [HttpGet]
-        public IActionResult AddRecipe()
+        private IRecipeService recipeService;
+
+        public RecipeController(IRecipeService recipeService)
         {
-            return View();
+            this.recipeService = recipeService;
         }
-        [HttpPost]
-        public IActionResult AddRecipe(AddRecipeViewModel model)
+
+        [HttpGet]
+       
+        public async  Task<IActionResult> AddRecipe()
         {
+          var model= await recipeService.LoadAddRecipeViewModelWithProducts();
 
             return View(model);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult AddRecipe(AddRecipeViewModel model)
+        {
+            Console.WriteLine(model);
+            return Ok(200);
         }
     }
 }
