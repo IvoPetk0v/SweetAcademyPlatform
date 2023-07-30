@@ -15,6 +15,7 @@ namespace SweetAcademy.Data.Models
         {
             this.Trainings = new HashSet<Training>();
             this.RecipeProducts = new HashSet<RecipeProduct>();
+           
         }
 
         [Key]
@@ -48,8 +49,5 @@ namespace SweetAcademy.Data.Models
         [DefaultValue(true)]
         public bool Active { get; set; }
 
-        [NotMapped]
-        public decimal TotalPrice => this.RecipeProducts
-            .Sum(rp => rp.Product.Price * (decimal)rp.Quantity);
     }
 }

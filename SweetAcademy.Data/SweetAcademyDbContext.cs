@@ -27,6 +27,7 @@ namespace SweetAcademy.Data
 
             builder.ApplyConfigurationsFromAssembly(configAssembly);
             base.OnModelCreating(builder);
+            
         }
     }
 }

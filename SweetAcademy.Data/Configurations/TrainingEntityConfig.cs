@@ -12,6 +12,7 @@ namespace SweetAcademy.Data.Configurations
         {
             builder.HasOne(t => t.Trainer).WithMany(c => c.CouchingSession).HasForeignKey(t => t.ChefId)
                 .OnDelete(DeleteBehavior.Restrict);
+            builder.Property(p => p.Active).HasDefaultValue(true);
         }
     }
 }

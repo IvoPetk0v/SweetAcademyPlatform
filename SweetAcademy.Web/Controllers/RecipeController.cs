@@ -53,5 +53,12 @@ namespace SweetAcademy.Web.Controllers
             var model = await recipeService.ShowFullRecipeInfoAsync(id);
             return View(model);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
+        {
+            await recipeService.DeactivatedRecipeAsync(id);
+            return RedirectToAction("AllRecipes");
+        }
     }
 }

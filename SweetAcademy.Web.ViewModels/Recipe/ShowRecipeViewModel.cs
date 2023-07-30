@@ -1,4 +1,5 @@
 ﻿
+using System.Runtime.CompilerServices;
 using SweetAcademy.Web.ViewModels.Product;
 
 namespace SweetAcademy.Web.ViewModels.Recipe

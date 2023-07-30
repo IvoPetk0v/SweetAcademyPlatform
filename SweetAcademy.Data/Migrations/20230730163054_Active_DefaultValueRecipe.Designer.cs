@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SweetAcademy.Data;
 
@@ -11,9 +12,10 @@ using SweetAcademy.Data;
 namespace SweetAcademy.Data.Migrations
 {
     [DbContext(typeof(SweetAcademyDbContext))]
-    partial class SweetAcademyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230730163054_Active_DefaultValueRecipe")]
+    partial class Active_DefaultValueRecipe
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -382,9 +384,7 @@ namespace SweetAcademy.Data.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<bool>("Active")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(true);
+                        .HasColumnType("bit");
 
                     b.Property<Guid>("ChefId")
                         .HasColumnType("uniqueidentifier");

@@ -8,27 +8,40 @@
 <hr />
 
 <div class="text-center row">
-    @foreach (var product in Model)
-    {
-        <div class="card col-4" style="width: 20rem; ">
-            <div class="card-body">
-                <h5 class="card-title mt-1">@product.Name</h5>
-                <p class="mb-0"> Measurement Unit: @product.Unit</p>
-                <p class="mb-0">Price per package: @product.Price BGN</p>
-            </div>
-            <div class="row-3">
-                <form class="input-group-sm" asp-controller="Product" asp-action="Edit" asp-route-id="@product.Id" method="get">
-                    <input type="submit" value="Edit product" class="fs-6 btn-sm btn-success " />
-                </form>
-                <hr />
-                <form class="input-group-sm" asp-controller="Product" asp-action="Delete" asp-route-id="@product.Id"
-                      onsubmit="return confirm('Do you really want to delete the product?');">
-                    <input type="submit" value="Delete product" class="fs-6 btn-xs btn-danger " />
-                </form>
-                <br />
-            </div>
-        </div>
-    }
-</div>
+    @{
+        if (Model.Count > 0)
+        {
+            @foreach (var product in Model)
+            {
+                <div class="card col-4" style="width: 20rem; ">
+                    <div class="card-body">
+                        <h5 class="card-title mt-1">@product.Name</h5>
+                        <p class="mb-0"> Measurement Unit: @product.Unit</p>
+                        <p class="mb-0">Price per package: @product.Price BGN</p>
+                    </div>
+                    <div class="row-3">
+                        <form class="input-group-sm" asp-controller="Product" asp-action="Edit" asp-route-id="@product.Id" method="get">
+                            <input type="submit" value="Edit product" class="fs-6 btn-sm btn-success " />
+                        </form>
+                        <hr />
+                        <form class="input-group-sm" asp-controller="Product" asp-action="Delete" asp-route-id="@product.Id"
+                              onsubmit="return confirm('Do you really want to delete the product?');">
+                            <input type="submit" value="Delete product" class="fs-6 btn-xs btn-danger " />
+                        </form>
+                        <br />
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <p>There is no added products yet!</p>
+            <p>May want to add some :   <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="AddProducts">Click here to add products</a> </p>
+          
+        }
 
-        
+    }
+
+    </div>
+
+

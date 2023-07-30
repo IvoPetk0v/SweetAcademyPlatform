@@ -20,7 +20,7 @@ namespace SweetAcademy.Data.Models
         [ForeignKey(nameof(TrainingId))]
         public virtual Training OrderedTraining { get; set; } = null!;
 
-        public decimal TotalPrice => this.OrderedTraining.Recipe.TotalPrice +
+        public decimal? TotalPrice => this.OrderedTraining.Recipe.RecipeProducts.Sum(rp => rp.Product.Price * (decimal)rp.Quantity) +
                                      this.OrderedTraining.Trainer.TaxPerTrainingForStudent;
     }
 }

@@ -54,7 +54,8 @@ function addfaqs() {
     faqs_row++;
 }
 
-function addrecipe() {
+function addrecipe(event) {
+    event.preventDefault();
     var token = $('input[name="__RequestVerificationToken"]').val();
 
     var body = {};
@@ -88,7 +89,11 @@ function addrecipe() {
     var StepsJSON = JSON.stringify(string);
 
     body.StepsJSON = StepsJSON;
-    $.post("https://localhost:7217/Recipe/AddRecipe", body).done(function (data) { alert("Recipe added successfully!! ") });
+    $.post("/Recipe/AddRecipe", body).done(function () {
+        alert("Recipe added successfully!! ");
+        window.location = "/Recipe/AllRecipes";
+        
+    });
 
-    location.replace("https://localhost:7217/Recipe/AddRecipe");
+
 }
