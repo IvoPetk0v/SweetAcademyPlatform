@@ -66,5 +66,28 @@ namespace SweetAcademy.Services.Data
                 }).ToArrayAsync();
             return model;
         }
+
+        public Task<ShowRecipeViewModel> ShowFullRecipeInfoAsync(int id)
+        {
+            var model = dbContext.Recipes.Where(r => r.Id == id).Include(r => r.RecipeProducts)
+                .ThenInclude(r => r.Product).Select(r => new ShowRecipeViewModel()
+                {
+                    Id = r.Id,
+                    Name = r.Name,
+                    Description = r.Description,
+                    ImageUrl = r.ImageUrl,
+                    TotalPrice = r.TotalPrice,
+                    Steps=r.Steps,
+                    Products = r.RecipeProducts.Select(p => new ProductViewModel()
+                    {
+                        Id = p.ProductId,
+                        Name = p.Product.Name,
+                        Price = p.Product.Price,
+                        Quantity = p.Quantity,
+                        Unit = p.Product.Unit,
+                    }).ToArray(),
+                }).FirstAsync();
+            return model;
+        }
     }
 }

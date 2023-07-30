@@ -46,5 +46,12 @@ namespace SweetAcademy.Web.Controllers
 
             return View(model);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Details(int id)
+        {
+            var model = await recipeService.ShowFullRecipeInfoAsync(id);
+            return View(model);
+        }
     }
 }
