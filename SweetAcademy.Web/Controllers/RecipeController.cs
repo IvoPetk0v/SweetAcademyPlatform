@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-
+using Microsoft.DotNet.Scaffolding.Shared.Messaging;
 using SweetAcademy.Services.Data.Interfaces;
 using SweetAcademy.Web.ViewModels.Recipe;
 
@@ -15,19 +15,36 @@ namespace SweetAcademy.Web.Controllers
         }
 
         [HttpGet]
-       
-        public async  Task<IActionResult> AddRecipe()
+        public async Task<IActionResult> AddRecipe()
         {
-          var model= await recipeService.LoadAddRecipeViewModelWithProducts();
+            var model = await recipeService.LoadAddRecipeViewModelWithProductsAsync();
 
             return View(model);
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult AddRecipe(AddRecipeViewModel model)
         {
-            Console.WriteLine(model);
-            return Ok(200);
+            try
+            {
+                recipeService.AddRecipeAsync(model);
+                return Ok(200);
+            }
+
+            catch (Exception e)
+            {
+                return BadRequest(error: e.Message);
+            }
+
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> AllRecipes()
+        {
+            var model = await recipeService.GetAllRecipesAsync();
+
+            return View(model);
         }
     }
 }

@@ -1,0 +1,36 @@
+﻿@model ICollection<ShowRecipeViewModel>
+
+@{
+    ViewBag.Title = "All Recipes";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="text-center row">
+    @foreach (var recipe in Model)
+    {
+        <div class="card col-4" style="width: 20rem; ">
+            <img src="@recipe.ImageUrl" class="card-img-top img-fluid" alt="@recipe.Name image">
+            <div class="card-body">
+                <h5 class="card-title mt-1">@recipe.Name</h5>
+                <label class="text-primary fw-bold">Description:</label>
+                <p class="mb-0">@recipe.Description</p>
+                <br/>
+                <p class="mb-0 fw-bold"> <label class="text-primary">Total price: </label>  @recipe.TotalPrice BGN</p>
+                <table></table>
+            </div>
+            <div class="row-3">
+                <form class="input-group-sm" asp-controller="Recipe" asp-action="Details" asp-route-id="@recipe.Id" method="get">
+                    <input type="submit" value="Show details" class="fs-6 btn-sm btn-primary "/>
+                </form>
+                <hr/>
+                <form class="input-group-sm" asp-controller="Recipe" asp-action="Delete" asp-route-id="@recipe.Id"
+                      onsubmit="return confirm('Do you really want to delete the product?');">
+                    <input type="submit" value="Delete product" class="fs-6 btn-xs btn-danger "/>
+                </form>
+                <br/>
+            </div>
+        </div>
+    }
+</div>

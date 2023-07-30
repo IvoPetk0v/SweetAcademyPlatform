@@ -5,7 +5,11 @@ namespace SweetAcademy.Services.Data.Interfaces
 {
     public interface IRecipeService
     {
-        public Task<AddRecipeViewModel> LoadAddRecipeViewModelWithProducts();
+        public Task<AddRecipeViewModel> LoadAddRecipeViewModelWithProductsAsync();
+
+        public Task AddRecipeAsync(AddRecipeViewModel addRecipeViewModel);
+
+        public Task<ICollection<ShowRecipeViewModel>> GetAllRecipesAsync();
 
     }
 }
