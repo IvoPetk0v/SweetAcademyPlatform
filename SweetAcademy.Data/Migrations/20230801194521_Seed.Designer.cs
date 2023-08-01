@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SweetAcademy.Data;
 
@@ -11,9 +12,10 @@ using SweetAcademy.Data;
 namespace SweetAcademy.Data.Migrations
 {
     [DbContext(typeof(SweetAcademyDbContext))]
-    partial class SweetAcademyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230801194521_Seed")]
+    partial class Seed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -482,25 +484,25 @@ namespace SweetAcademy.Data.Migrations
                         {
                             RecipeId = 1,
                             ProductId = 1,
-                            Quantity = 5
+                            Quantity = 0
                         },
                         new
                         {
                             RecipeId = 1,
                             ProductId = 2,
-                            Quantity = 1
+                            Quantity = 0
                         },
                         new
                         {
                             RecipeId = 1,
                             ProductId = 3,
-                            Quantity = 4
+                            Quantity = 0
                         },
                         new
                         {
                             RecipeId = 2,
                             ProductId = 1,
-                            Quantity = 5
+                            Quantity = 0
                         },
                         new
                         {
@@ -512,7 +514,7 @@ namespace SweetAcademy.Data.Migrations
                         {
                             RecipeId = 2,
                             ProductId = 3,
-                            Quantity = 4
+                            Quantity = 0
                         });
                 });
 

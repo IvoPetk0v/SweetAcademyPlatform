@@ -29,5 +29,6 @@ namespace SweetAcademy.Data
             base.OnModelCreating(builder);
             
         }
+        
     }
 }
