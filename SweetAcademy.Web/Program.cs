@@ -1,4 +1,3 @@
-using System.Configuration;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -8,6 +7,7 @@ using SweetAcademy.Data.Models;
 using SweetAcademy.Services.Data.Interfaces;
 using SweetAcademy.Web.Infrastructure.Extensions;
 using SweetAcademy.Web.Infrastructure.ModelBinders;
+using static SweetAcademy.Common.GeneralApplicationConstants;
 
 namespace SweetAcademy.Web
 {
@@ -40,6 +40,7 @@ namespace SweetAcademy.Web
                     options.Password.RequiredLength = builder.Configuration
                         .GetValue<int>("Identity:Password:RequiredLength");
                 })
+                .AddRoles<IdentityRole<Guid>>()
                 .AddEntityFrameworkStores<SweetAcademyDbContext>();
 
             builder.Services.AddApplicationServices(typeof(IProductService));
@@ -74,6 +75,11 @@ namespace SweetAcademy.Web
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            if (app.Environment.IsDevelopment())
+            {
+                app.SeedAdmin(DevelopmentAdminEmail);
+            }
 
             app.MapControllerRoute(
                 name: "default",

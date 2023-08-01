@@ -1,5 +1,12 @@
 ﻿using System.Reflection;
+
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
+
+using SweetAcademy.Data.Models;
+using static SweetAcademy.Common.GeneralApplicationConstants;
+
 
 namespace SweetAcademy.Web.Infrastructure.Extensions
 {
@@ -35,6 +42,43 @@ namespace SweetAcademy.Web.Infrastructure.Extensions
 
                 services.AddScoped(interfaceType, implementationType);
             }
+        }
+
+
+        /// <summary>
+        /// This method seeds first Admin if there is no created yet, only for development env.
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="adminEmail"></param>
+        /// <returns>applicationBuilder</returns>
+        public static IApplicationBuilder SeedAdmin(this IApplicationBuilder app, string adminEmail)
+        {
+            using IServiceScope scopedServices = app.ApplicationServices.CreateScope();
+            IServiceProvider serviceProvider = scopedServices.ServiceProvider;
+
+            UserManager<ApplicationUser> userManager =
+                serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+
+            RoleManager<IdentityRole<Guid>> roleManager =
+                serviceProvider.GetRequiredService<RoleManager<IdentityRole<Guid>>>();
+
+            Task.Run(async () =>
+                {
+                    if (await roleManager.RoleExistsAsync(RoleAdminName))
+                    {
+                        return;
+                    }
+
+                    var role = new IdentityRole<Guid>(RoleAdminName);
+                    await roleManager.CreateAsync(role);
+
+                    var adminUser = await userManager.FindByEmailAsync(adminEmail);
+                    await userManager.AddToRoleAsync(adminUser, RoleAdminName);
+                })
+                .GetAwaiter()
+                .GetResult();
+
+            return app;
         }
     }
 }
