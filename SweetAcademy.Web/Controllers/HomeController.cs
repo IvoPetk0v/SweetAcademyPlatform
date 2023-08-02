@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 using SweetAcademy.Web.ViewModels.Home;
+using static SweetAcademy.Common.GeneralApplicationConstants;
 
 namespace SweetAcademy.Web.Controllers
 {
@@ -18,10 +19,17 @@ namespace SweetAcademy.Web.Controllers
         [AllowAnonymous]
         public IActionResult Index()
         {
-            return View();
+            if (this.User.IsInRole(RoleAdminName))
+            {
+                return this.RedirectToAction("Index","Home",new {Area = AdminAreaName});
+            }
+            else
+            {
+                return View();
+            }
         }
 
-       
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
