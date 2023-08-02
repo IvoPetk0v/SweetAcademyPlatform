@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.DotNet.Scaffolding.Shared.Messaging;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+
 using SweetAcademy.Services.Data.Interfaces;
 using SweetAcademy.Web.ViewModels.Recipe;
+using static SweetAcademy.Common.GeneralApplicationConstants;
 
 namespace SweetAcademy.Web.Controllers
 {
@@ -55,6 +57,7 @@ namespace SweetAcademy.Web.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles =RoleAdminName)]
         public async Task<IActionResult> Delete(int id)
         {
             await recipeService.DeactivatedRecipeAsync(id);

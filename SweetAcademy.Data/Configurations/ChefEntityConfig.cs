@@ -14,9 +14,9 @@ namespace SweetAcademy.Data.Configurations
             {
                 Id = Guid.Parse("E7ECBFE6-BE8C-4C46-AE6F-001BBD8A4182"),
                 Active = true,
-                ApplicationUserId = Guid.Parse("544B4C23-1F5E-4614-9FA8-08DB92B169A9"),
+                ApplicationUserId = Guid.Parse("5BFC2446-3FD2-4990-9265-08DB8AAD116C"),
                 FullName ="Steffy Cheffy",
-                PhoneNumber = 0899999999,
+                PhoneNumber = 899999999,
                 TaxPerTrainingForStudent = 30.50m
             }
         };

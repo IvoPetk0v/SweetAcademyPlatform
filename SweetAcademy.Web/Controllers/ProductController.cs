@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using SweetAcademy.Services.Data.Interfaces;
 using SweetAcademy.Web.ViewModels.Product;
+using static SweetAcademy.Common.GeneralApplicationConstants;
 
 namespace SweetAcademy.Web.Controllers
 {
@@ -15,11 +16,13 @@ namespace SweetAcademy.Web.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = RoleAdminName)]
         public IActionResult AddProducts()
         {
             return View();
         }
         [HttpPost]
+        [Authorize(Roles = RoleAdminName)]
         public async Task<IActionResult> AddProducts(ProductViewModel model)
         {
             if (ModelState.IsValid == false)
@@ -45,6 +48,7 @@ namespace SweetAcademy.Web.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = RoleAdminName)]
         public async Task<IActionResult> Delete(int id)
         {
 
@@ -60,14 +64,17 @@ namespace SweetAcademy.Web.Controllers
 
         }
         [HttpGet]
+        [Authorize(Roles = RoleAdminName)]
         public async Task<IActionResult> Edit(int id)
         {
             var model = await productService.GetProductById(id);
             return View(model);
         }
-
+        
         [HttpPost]
+        [Authorize(Roles = RoleAdminName)]
         public async Task<IActionResult> Edit(int id, ProductViewModel model)
+
         {
             if (ModelState.IsValid == false)
             {

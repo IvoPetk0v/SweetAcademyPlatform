@@ -19,16 +19,7 @@ namespace SweetAcademy.Data.Configurations
                 ConcurrencyStamp = "df94bcd6-62ee-46f1-a089-0576b12308bf",
                 LockoutEnabled = true,
             },
-            new ApplicationUser()
-            {
-                Id = Guid.Parse("544B4C23-1F5E-4614-9FA8-08DB92B169A9"),
-                UserName = "steffy@chef.bg",
-                NormalizedEmail = "STEFFY@CHEF.BG",
-                PasswordHash = "AQAAAAEAACcQAAAAEHTEsAJqxRwBnCrc+BtqPTZ1jrQT4yynAbmVOziB0EWfWW/n+iCtwh3LNsa4TXLxmQ==",
-                SecurityStamp = "AAIANXMF3LVQYKLZ2QDICYEV3LUFTG5E",
-                ConcurrencyStamp = "820ac633-56a5-408a-817f-fcad2a56dcf6",
-                LockoutEnabled = true,
-            },
+         
             new ApplicationUser()
             {
                 Id = Guid.Parse("21D6DFFE-E209-4DCC-9FA9-08DB92B169A9"),

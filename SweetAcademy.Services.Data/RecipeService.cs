@@ -71,7 +71,7 @@ namespace SweetAcademy.Services.Data
 
         public Task<ShowRecipeViewModel> ShowFullRecipeInfoAsync(int id)
         {
-            var model = dbContext.Recipes.Where(r => r.Id == id).Include(r => r.RecipeProducts)
+            var model = dbContext.Recipes.Where(r => r.Id == id && r.Active).Include(r => r.RecipeProducts)
                 .ThenInclude(r => r.Product).Select(r => new ShowRecipeViewModel()
                 {
                     Id = r.Id,

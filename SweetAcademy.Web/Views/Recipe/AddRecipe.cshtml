@@ -11,17 +11,17 @@
     <div class="col-sm-12 offset-lg-8 offset-xl-3 col-xl-6">
         <form asp-action="AddRecipe" method="post">
             <div class="mb-3">
-                <label asp-for="@Model.Name" class="form-label">Recipe name</label>
+                <label asp-for="@Model.Name" class="form-label fw-bold">Recipe name</label>
                 <input id="Name" asp-for="@Model.Name" class="form-control" aria-required="true" placeholder="Name" />
                 <span asp-validation-for="@Model.Name" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label asp-for="@Model.Description" class="form-label">Description</label>
+                <label asp-for="@Model.Description" class="form-label  fw-bold">Description</label>
                 <textarea id="Description" asp-for="@Model.Description" class="form-control" aria-required="true">Description</textarea>
                 <span asp-validation-for="@Model.Description" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label asp-for="@Model.ImageUrl" class="form-label">Image link</label>
+                <label asp-for="@Model.ImageUrl" class="form-label  fw-bold">Image link</label>
                 <input id="ImageUrl" asp-for="@Model.ImageUrl" class="form-control" aria-required="true" placeholder="https://www.mypicture.com/" />
                 <span asp-validation-for="@Model.ImageUrl" class="text-danger"></span>
             </div>
@@ -37,10 +37,10 @@
                                     <table id="product" class="table table-striped table-hover">
                                         <thead>
                                             <tr>
-                                                <th>Product Name</th>
-                                                <th>Package volume</th>
-                                                <th>Quantity per package</th>
-                                                <th>Check in for include product</th>
+                                                <th class="fw-bold">Product Name</th>
+                                                <th class="fw-bold">Package volume</th>
+                                                <th class="fw-bold">Quantity per package</th>
+                                                <th class="fw-bold">Check in for include product</th>
                                             </tr>
                                         </thead>
                                         <tbody>
