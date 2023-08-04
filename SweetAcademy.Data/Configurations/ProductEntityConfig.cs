@@ -7,7 +7,16 @@ namespace SweetAcademy.Data.Configurations
 {
     public class ProductEntityConfig : IEntityTypeConfiguration<Product>
     {
-        private readonly HashSet<Product> seeds = new HashSet<Product>()
+        public void Configure(EntityTypeBuilder<Product> builder)
+        {
+            builder.Property(p => p.Price).HasPrecision(18, 2);
+            builder.HasKey(p => p.Id);
+            builder.Property(p => p.Active).HasDefaultValue(true);
+
+        }
+        public static HashSet<Product> Seed()
+        {
+            HashSet<Product> seeds = new HashSet<Product>()
         {
             new Product
             {
@@ -37,16 +46,8 @@ namespace SweetAcademy.Data.Configurations
                 Price = 1.5m,
                 Unit = "500 ml"
             }
-
         };
-
-        public void Configure(EntityTypeBuilder<Product> builder)
-        {
-            builder.Property(p => p.Price).HasPrecision(18, 2);
-            builder.HasKey(p => p.Id);
-            builder.Property(p => p.Active).HasDefaultValue(true);
-            builder.HasData(seeds);
+            return seeds;
         }
-
     }
 }

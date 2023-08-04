@@ -1,13 +1,23 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using SweetAcademy.Data.Migrations;
 using SweetAcademy.Data.Models;
 
 namespace SweetAcademy.Data.Configurations
 {
     public class RecipeEntityConfig : IEntityTypeConfiguration<Recipe>
     {
-        private readonly HashSet<Recipe> seeds = new HashSet<Recipe>()
+
+        public void Configure(EntityTypeBuilder<Recipe> builder)
+        {
+            builder.Property(p => p.Active).HasDefaultValue(true);
+
+        }
+
+        public static HashSet<Recipe> Seed()
+        {
+            HashSet<Recipe> seeds = new HashSet<Recipe>()
         {
             new Recipe()
             {
@@ -26,15 +36,12 @@ namespace SweetAcademy.Data.Configurations
                 ImageUrl = "https://img.freepik.com/free-vector/ice-cream-cone-cartoon-icon-illustration-sweet-food-icon-concept-isolated-flat-cartoon-style_138676-2924.jpg?w=740&t=st=1690915084~exp=1690915684~hmac=541a6d2f00afd0f44bf7033fbbb68151944f853d57559807362364812e0bef60",
                 Name = "VEGAN ICE CREAM",
                 Active = true,
-                
+
                 StepsJson = "[\"Blend: In a blender, add all ingredients and blend on high until thick and creamy, 1-2 min. Transfer mixture to an airtight container and chill 2-4 hours.\",\"Freeze: May serve immediately for a frozen custard-like texture that's ultra creamy, smooth, and soft. Otherwise, transfer ice cream to an airtight container and freeze 30-60 minutes for a firmer texture. If frozen much longer, it will need thaw time at room temp before serving (actual thaw time depends on your room temp.)\"]",
 
             },
         };
-        public void Configure(EntityTypeBuilder<Recipe> builder)
-        {
-            builder.Property(p => p.Active).HasDefaultValue(true);
-            builder.HasData(seeds);
+            return seeds;
         }
     }
 }

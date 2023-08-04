@@ -33,8 +33,8 @@ namespace SweetAcademy.Data.Models
         public decimal TaxPerTrainingForStudent { get; set; }
 
         public virtual ICollection<Training> CouchingSession { get; set; }
+
         [Required]
-        [DefaultValue(true)]
         public bool Active { get; set; } 
     }
 }

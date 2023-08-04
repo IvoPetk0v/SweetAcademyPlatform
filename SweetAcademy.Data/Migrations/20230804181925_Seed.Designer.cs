@@ -12,7 +12,7 @@ using SweetAcademy.Data;
 namespace SweetAcademy.Data.Migrations
 {
     [DbContext(typeof(SweetAcademyDbContext))]
-    [Migration("20230801194521_Seed")]
+    [Migration("20230804181925_Seed")]
     partial class Seed
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -256,20 +256,6 @@ namespace SweetAcademy.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("544b4c23-1f5e-4614-9fa8-08db92b169a9"),
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "820ac633-56a5-408a-817f-fcad2a56dcf6",
-                            EmailConfirmed = false,
-                            LockoutEnabled = true,
-                            NormalizedEmail = "STEFFY@CHEF.BG",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHTEsAJqxRwBnCrc+BtqPTZ1jrQT4yynAbmVOziB0EWfWW/n+iCtwh3LNsa4TXLxmQ==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "AAIANXMF3LVQYKLZ2QDICYEV3LUFTG5E",
-                            TwoFactorEnabled = false,
-                            UserName = "steffy@chef.bg"
-                        },
-                        new
-                        {
                             Id = new Guid("21d6dffe-e209-4dcc-9fa9-08db92b169a9"),
                             AccessFailedCount = 0,
                             ConcurrencyStamp = "f420ec05-4560-49a1-a22a-3a7c6b0ffc9a",
@@ -291,7 +277,9 @@ namespace SweetAcademy.Data.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("Active")
-                        .HasColumnType("bit");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
 
                     b.Property<Guid>("ApplicationUserId")
                         .HasColumnType("uniqueidentifier");
@@ -319,7 +307,7 @@ namespace SweetAcademy.Data.Migrations
                         {
                             Id = new Guid("e7ecbfe6-be8c-4c46-ae6f-001bbd8a4182"),
                             Active = true,
-                            ApplicationUserId = new Guid("544b4c23-1f5e-4614-9fa8-08db92b169a9"),
+                            ApplicationUserId = new Guid("5bfc2446-3fd2-4990-9265-08db8aad116c"),
                             FullName = "Steffy Cheffy",
                             PhoneNumber = 899999999,
                             TaxPerTrainingForStudent = 30.50m
@@ -355,6 +343,11 @@ namespace SweetAcademy.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<bool>("Active")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(500)
@@ -377,6 +370,7 @@ namespace SweetAcademy.Data.Migrations
                         new
                         {
                             Id = 1,
+                            Active = false,
                             Name = "Sugar",
                             Price = 0.20m,
                             Unit = "50 g."
@@ -384,6 +378,7 @@ namespace SweetAcademy.Data.Migrations
                         new
                         {
                             Id = 2,
+                            Active = false,
                             Name = "Butter",
                             Price = 6.99m,
                             Unit = "250 g."
@@ -391,6 +386,7 @@ namespace SweetAcademy.Data.Migrations
                         new
                         {
                             Id = 3,
+                            Active = false,
                             Name = "Chocolate",
                             Price = 3.50m,
                             Unit = "90 g."
@@ -398,6 +394,7 @@ namespace SweetAcademy.Data.Migrations
                         new
                         {
                             Id = 4,
+                            Active = false,
                             Name = "Milk",
                             Price = 1.5m,
                             Unit = "500 ml"
@@ -484,25 +481,25 @@ namespace SweetAcademy.Data.Migrations
                         {
                             RecipeId = 1,
                             ProductId = 1,
-                            Quantity = 0
+                            Quantity = 5
                         },
                         new
                         {
                             RecipeId = 1,
                             ProductId = 2,
-                            Quantity = 0
+                            Quantity = 1
                         },
                         new
                         {
                             RecipeId = 1,
                             ProductId = 3,
-                            Quantity = 0
+                            Quantity = 4
                         },
                         new
                         {
                             RecipeId = 2,
                             ProductId = 1,
-                            Quantity = 0
+                            Quantity = 5
                         },
                         new
                         {
@@ -514,7 +511,7 @@ namespace SweetAcademy.Data.Migrations
                         {
                             RecipeId = 2,
                             ProductId = 3,
-                            Quantity = 0
+                            Quantity = 4
                         });
                 });
 
@@ -555,6 +552,18 @@ namespace SweetAcademy.Data.Migrations
                     b.HasIndex("RecipeId");
 
                     b.ToTable("Trainings");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Active = true,
+                            ChefId = new Guid("e7ecbfe6-be8c-4c46-ae6f-001bbd8a4182"),
+                            Name = "Learn how to make Lava Cake like a pro with Stef",
+                            OpenSeats = 1,
+                            RecipeId = 1,
+                            StartDate = new DateTime(2024, 2, 12, 20, 30, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("ApplicationUserTraining", b =>

@@ -9,13 +9,28 @@ namespace SweetAcademy.Data.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.AddColumn<bool>(
+                name: "Active",
+                table: "Products",
+                type: "bit",
+                nullable: false,
+                defaultValue: true);
+
+            migrationBuilder.AlterColumn<bool>(
+                name: "Active",
+                table: "Chef",
+                type: "bit",
+                nullable: false,
+                defaultValue: true,
+                oldClrType: typeof(bool),
+                oldType: "bit");
+
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
                     { new Guid("21d6dffe-e209-4dcc-9fa9-08db92b169a9"), 0, "f420ec05-4560-49a1-a22a-3a7c6b0ffc9a", null, false, true, null, "IP@CUSTOMER.BG", null, "AQAAAAEAACcQAAAAEO1XTr6PzJ1+1+fdYOEB+Dq8GcV5kClGxOY90gYEs0MmzeRZA2G7eGL205oEaCYbcg==", null, false, "2WCQ3I2BZ2DU4YJT62ZMCHKVUCO2PKGL", false, "ip@customer.bg" },
-                    { new Guid("544b4c23-1f5e-4614-9fa8-08db92b169a9"), 0, "820ac633-56a5-408a-817f-fcad2a56dcf6", null, false, true, null, "STEFFY@CHEF.BG", null, "AQAAAAEAACcQAAAAEHTEsAJqxRwBnCrc+BtqPTZ1jrQT4yynAbmVOziB0EWfWW/n+iCtwh3LNsa4TXLxmQ==", null, false, "AAIANXMF3LVQYKLZ2QDICYEV3LUFTG5E", false, "steffy@chef.bg" },
                     { new Guid("5bfc2446-3fd2-4990-9265-08db8aad116c"), 0, "df94bcd6-62ee-46f1-a089-0576b12308bf", null, false, true, null, "ADMIN@ADMIN.BG", null, "AQAAAAEAACcQAAAAEHXuw6dYlxC8AEJ5dq817hzjCU/O72xLYs+NeKUXL/Rdikx4mt6Q3+3jzAhARG4NEA==", null, false, "EF2DAKHPWV6KTXCJF4JR2RQMHEXPPGQ3", false, "admin@admin.bg" }
                 });
 
@@ -42,20 +57,25 @@ namespace SweetAcademy.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Chef",
                 columns: new[] { "Id", "Active", "ApplicationUserId", "FullName", "PhoneNumber", "TaxPerTrainingForStudent" },
-                values: new object[] { new Guid("e7ecbfe6-be8c-4c46-ae6f-001bbd8a4182"), true, new Guid("544b4c23-1f5e-4614-9fa8-08db92b169a9"), "Steffy Cheffy", 899999999, 30.50m });
+                values: new object[] { new Guid("e7ecbfe6-be8c-4c46-ae6f-001bbd8a4182"), true, new Guid("5bfc2446-3fd2-4990-9265-08db8aad116c"), "Steffy Cheffy", 899999999, 30.50m });
 
             migrationBuilder.InsertData(
                 table: "RecipesProducts",
                 columns: new[] { "ProductId", "RecipeId", "Quantity" },
                 values: new object[,]
                 {
-                    { 1, 1, 0 },
-                    { 2, 1, 0 },
-                    { 3, 1, 0 },
-                    { 1, 2, 0 },
+                    { 1, 1, 5 },
+                    { 2, 1, 1 },
+                    { 3, 1, 4 },
+                    { 1, 2, 5 },
                     { 2, 2, 0 },
-                    { 3, 2, 0 }
+                    { 3, 2, 4 }
                 });
+
+            migrationBuilder.InsertData(
+                table: "Trainings",
+                columns: new[] { "Id", "Active", "ChefId", "Name", "OpenSeats", "RecipeId", "StartDate" },
+                values: new object[] { 1, true, new Guid("e7ecbfe6-be8c-4c46-ae6f-001bbd8a4182"), "Learn how to make Lava Cake like a pro with Stef", 1, 1, new DateTime(2024, 2, 12, 20, 30, 0, 0, DateTimeKind.Unspecified) });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -64,16 +84,6 @@ namespace SweetAcademy.Data.Migrations
                 table: "AspNetUsers",
                 keyColumn: "Id",
                 keyValue: new Guid("21d6dffe-e209-4dcc-9fa9-08db92b169a9"));
-
-            migrationBuilder.DeleteData(
-                table: "AspNetUsers",
-                keyColumn: "Id",
-                keyValue: new Guid("5bfc2446-3fd2-4990-9265-08db8aad116c"));
-
-            migrationBuilder.DeleteData(
-                table: "Chef",
-                keyColumn: "Id",
-                keyValue: new Guid("e7ecbfe6-be8c-4c46-ae6f-001bbd8a4182"));
 
             migrationBuilder.DeleteData(
                 table: "Products",
@@ -111,9 +121,14 @@ namespace SweetAcademy.Data.Migrations
                 keyValues: new object[] { 3, 2 });
 
             migrationBuilder.DeleteData(
-                table: "AspNetUsers",
+                table: "Trainings",
                 keyColumn: "Id",
-                keyValue: new Guid("544b4c23-1f5e-4614-9fa8-08db92b169a9"));
+                keyValue: 1);
+
+            migrationBuilder.DeleteData(
+                table: "Chef",
+                keyColumn: "Id",
+                keyValue: new Guid("e7ecbfe6-be8c-4c46-ae6f-001bbd8a4182"));
 
             migrationBuilder.DeleteData(
                 table: "Products",
@@ -139,6 +154,24 @@ namespace SweetAcademy.Data.Migrations
                 table: "Recipes",
                 keyColumn: "Id",
                 keyValue: 2);
+
+            migrationBuilder.DeleteData(
+                table: "AspNetUsers",
+                keyColumn: "Id",
+                keyValue: new Guid("5bfc2446-3fd2-4990-9265-08db8aad116c"));
+
+            migrationBuilder.DropColumn(
+                name: "Active",
+                table: "Products");
+
+            migrationBuilder.AlterColumn<bool>(
+                name: "Active",
+                table: "Chef",
+                type: "bit",
+                nullable: false,
+                oldClrType: typeof(bool),
+                oldType: "bit",
+                oldDefaultValue: true);
         }
     }
 }

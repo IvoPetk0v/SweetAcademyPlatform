@@ -32,7 +32,6 @@ namespace SweetAcademy.Data.Models
         public virtual ICollection<ApplicationUser> Participators { get; set; } =null!;
 
         [Required]
-        [DefaultValue(true)]
         public bool Active { get; set; } 
 
         [Required]

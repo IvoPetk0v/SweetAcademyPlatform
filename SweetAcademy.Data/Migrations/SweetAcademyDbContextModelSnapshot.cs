@@ -275,7 +275,9 @@ namespace SweetAcademy.Data.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("Active")
-                        .HasColumnType("bit");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
 
                     b.Property<Guid>("ApplicationUserId")
                         .HasColumnType("uniqueidentifier");
@@ -548,6 +550,18 @@ namespace SweetAcademy.Data.Migrations
                     b.HasIndex("RecipeId");
 
                     b.ToTable("Trainings");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Active = true,
+                            ChefId = new Guid("e7ecbfe6-be8c-4c46-ae6f-001bbd8a4182"),
+                            Name = "Learn how to make Lava Cake like a pro with Stef",
+                            OpenSeats = 1,
+                            RecipeId = 1,
+                            StartDate = new DateTime(2024, 2, 12, 20, 30, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("ApplicationUserTraining", b =>
