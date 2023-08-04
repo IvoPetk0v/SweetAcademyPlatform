@@ -31,10 +31,21 @@
                     @if (User.IsInRole(RoleAdminName))
                     {
                         <hr/>
-                        <form class="input-group-sm" asp-area="" asp-controller="Recipe" asp-action="Delete" asp-route-id="@recipe.Id"
-                              onsubmit="return confirm('Do you really want to delete the recipe?');">
-                            <input type="submit" value="Delete recipe" class="fs-6 btn-xs btn-danger "/>
-                        </form>
+                       if (recipe.Active)
+                       {
+                           <form class="input-group-sm" asp-area="Admin" asp-controller="Recipe" asp-action="Delete" asp-route-id="@recipe.Id"
+                                 onsubmit="return confirm('Do you really want to delete the recipe?');">
+                               <input type="submit" value="Delete recipe" class="fs-6 btn-xs btn-danger "/>
+                           </form>
+                       }
+                       else
+                       {
+                           <form class="input-group-sm" asp-area="Admin" asp-controller="Recipe" asp-action="Activate" method="post" asp-route-id="@recipe.Id"
+                                 onsubmit="return confirm('Do you really want to activete again the recipe?');">
+                               <input type="submit" value="Set to ACTIVE recipe again" class="fs-6 btn-xs btn-danger "/>
+                           </form>
+                       }
+                      
                     }
 
                     <br/>

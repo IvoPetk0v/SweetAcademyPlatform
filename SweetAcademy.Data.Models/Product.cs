@@ -27,5 +27,8 @@ namespace SweetAcademy.Data.Models
         public decimal Price { get; set; } 
 
         public virtual ICollection<RecipeProduct> RecipeProducts { get; set; }
+
+        [Required]
+        public bool Active { get; set; }
     }
 }

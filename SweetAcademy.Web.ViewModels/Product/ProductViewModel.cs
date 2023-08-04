@@ -22,5 +22,7 @@ namespace SweetAcademy.Web.ViewModels.Product
 
         public int? Quantity { get; set; }
 
+        public bool Active { get; set; }
+
     }
 }

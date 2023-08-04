@@ -25,19 +25,30 @@
                         @if (User.IsInRole(RoleAdminName))
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="AddProducts">Add Products</a>
+                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Product" asp-action="AddProducts">Add Products</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Product" asp-action="AllProducts">All Products</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Recipe" asp-action="AllRecipes">All Recipes</a>
                             </li>
                         }
-
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="AllProducts">All Products</a>
-                        </li>
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="AllProducts">All Products</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Recipe" asp-action="AllRecipes">All Recipes</a>
+                            </li>
+                        }
+                     
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Recipe" asp-action="AddRecipe">Add Recipe</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Recipe" asp-action="AllRecipes">All Recipes</a>
-                        </li>
+                      
+
 
                     </ul>
                     <partial name="_LoginPartial" />

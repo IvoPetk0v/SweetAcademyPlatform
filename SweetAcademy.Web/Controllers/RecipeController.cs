@@ -30,7 +30,7 @@ namespace SweetAcademy.Web.Controllers
         {
             try
             {
-                recipeService.AddRecipeAsync(model);
+                recipeService.AddRecipe(model);
                 return Ok(200);
             }
 
@@ -44,7 +44,8 @@ namespace SweetAcademy.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> AllRecipes()
         {
-            var model = await recipeService.GetAllRecipesAsync();
+          
+            var model = await recipeService.GetAllActiveRecipesAsync();
 
             return View(model);
         }
@@ -52,16 +53,18 @@ namespace SweetAcademy.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Details(int id)
         {
-            var model = await recipeService.ShowFullRecipeInfoAsync(id);
-            return View(model);
+
+            try
+            {
+                var model = await recipeService.ShowFullRecipeInfoAsync(id);
+                return View(model);
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("AllRecipes");
+            }
+
         }
 
-        [HttpPost]
-        [Authorize(Roles =RoleAdminName)]
-        public async Task<IActionResult> Delete(int id)
-        {
-            await recipeService.DeactivatedRecipeAsync(id);
-            return RedirectToAction("AllRecipes");
-        }
     }
 }

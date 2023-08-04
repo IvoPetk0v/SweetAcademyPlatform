@@ -1,4 +1,5 @@
 ﻿
+using System.ComponentModel.Design;
 using System.Runtime.CompilerServices;
 using SweetAcademy.Web.ViewModels.Product;
 
@@ -17,5 +18,8 @@ namespace SweetAcademy.Web.ViewModels.Recipe
         public ICollection<string> Steps { get; set; } = null!;
         public ICollection<ProductViewModel> Products { get; set; }
         public decimal TotalPrice { get; set; }
+
+        public bool Active { get; set; }
     }
+
 }

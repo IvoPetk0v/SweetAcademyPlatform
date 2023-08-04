@@ -34,7 +34,20 @@ namespace SweetAcademy.Services.Data
             await dbContext.SaveChangesAsync();
         }
 
-        public async Task<ICollection<ProductViewModel>> GetAllProducts()
+        public async Task<ICollection<ProductViewModel>> GetAllActiveProducts()
+        {
+            var products = await dbContext.Products.Where(p => p.Active)
+                .Select(p => new ProductViewModel()
+                {
+                    Id = p.Id,
+                    Name = p.Name,
+                    Unit = p.Unit,
+                    Price = p.Price,
+                }).ToArrayAsync();
+
+            return products;
+        }
+        public async Task<ICollection<ProductViewModel>> GetAllProductsAsync()
         {
             var products = await dbContext.Products
                 .Select(p => new ProductViewModel()
@@ -42,27 +55,24 @@ namespace SweetAcademy.Services.Data
                     Id = p.Id,
                     Name = p.Name,
                     Unit = p.Unit,
-                    Price = p.Price
+                    Price = p.Price,
+                    Active = p.Active
                 }).ToArrayAsync();
 
             return products;
         }
 
-        public async Task DeleteProductById(int id)
+        public async Task DeactivateProductByIdAsync(int id)
         {
-            var productExist = dbContext.Products.Any(p => p.Id == id);
-
-            if (!productExist)
+            var product = await dbContext.Products.FirstOrDefaultAsync(p => p.Id == id);
+            if (product != null)
             {
-                throw new InvalidOperationException(
-                    message: "Can`t delete the product because it`s not existing in the list.");
+                product.Active = false;
+                await dbContext.SaveChangesAsync();
             }
-
-            dbContext.Products.Remove(dbContext.Products.First(p => p.Id == id));
-            await dbContext.SaveChangesAsync();
         }
 
-        public async Task<ProductViewModel> GetProductById(int id)
+        public async Task<ProductViewModel> GetProductByIdAsync(int id)
         {
             var product = await dbContext.Products.FirstAsync(p => p.Id == id);
             return new ProductViewModel()
@@ -70,11 +80,11 @@ namespace SweetAcademy.Services.Data
                 Id = product.Id,
                 Name = product.Name,
                 Unit = product.Unit,
-                Price = product.Price
+                Price = product.Price,
             };
         }
 
-        public async Task EditProduct(int id, ProductViewModel model)
+        public async Task EditProductAsync(int id, ProductViewModel model)
         {
             var product = await dbContext.Products.FirstAsync(p => p.Id == id);
             product.Name = model.Name;
@@ -82,6 +92,17 @@ namespace SweetAcademy.Services.Data
             product.Price = model.Price;
 
             await dbContext.SaveChangesAsync();
+        }
+
+        public async Task ActivateProductByIdAsync(int id)
+        {
+            var product = await dbContext.Products.FirstOrDefaultAsync(p => p.Id == id);
+            if (product != null)
+            {
+                product.Active = true;
+                await dbContext.SaveChangesAsync();
+            }
+
         }
     }
 }

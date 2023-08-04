@@ -44,7 +44,7 @@ namespace SweetAcademy.Data.Configurations
         {
             builder.Property(p => p.Price).HasPrecision(18, 2);
             builder.HasKey(p => p.Id);
-
+            builder.Property(p => p.Active).HasDefaultValue(true);
             builder.HasData(seeds);
         }
 

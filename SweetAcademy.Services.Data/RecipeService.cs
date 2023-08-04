@@ -19,7 +19,7 @@ namespace SweetAcademy.Services.Data
         public async Task<AddRecipeViewModel> LoadAddRecipeViewModelWithProductsAsync()
         {
             var recipeModel = new AddRecipeViewModel();
-            var products = await dbContext.Products
+            var products = await dbContext.Products.Where(p=>p.Active)
                 .Select(p => new ProductViewModel
                 {
                     Id = p.Id,
@@ -29,7 +29,7 @@ namespace SweetAcademy.Services.Data
             recipeModel.Products = products;
             return recipeModel;
         }
-        public Task AddRecipeAsync(AddRecipeViewModel addRecipeViewModel)
+        public Task AddRecipe(AddRecipeViewModel addRecipeViewModel)
         {
             var recipe = new Recipe()
             {
@@ -53,8 +53,9 @@ namespace SweetAcademy.Services.Data
             dbContext.SaveChanges();
             return Task.FromResult(result: "ok");
         }
-        public async Task<ICollection<ShowRecipeViewModel>> GetAllRecipesAsync()
+        public async Task<ICollection<ShowRecipeViewModel>> GetAllActiveRecipesAsync()
         {
+
             var model = await dbContext.Recipes.Where(r => r.Active == true)
                 .Include(r => r.RecipeProducts)
                 .ThenInclude(r => r.Product)
@@ -65,6 +66,23 @@ namespace SweetAcademy.Services.Data
                     Description = r.Description,
                     ImageUrl = r.ImageUrl,
                     TotalPrice = decimal.Round(r.RecipeProducts.Sum(rp => rp.Product.Price * (decimal)rp.Quantity), 2, MidpointRounding.AwayFromZero)
+                }).ToArrayAsync();
+            return model;
+        }
+
+        public async Task<ICollection<ShowRecipeViewModel>> GetAllRecipesAsync()
+        {
+            var model = await dbContext.Recipes
+                .Include(r => r.RecipeProducts)
+                .ThenInclude(r => r.Product)
+                .Select(r => new ShowRecipeViewModel()
+                {
+                    Id = r.Id,
+                    Name = r.Name,
+                    Description = r.Description,
+                    ImageUrl = r.ImageUrl,
+                    TotalPrice = decimal.Round(r.RecipeProducts.Sum(rp => rp.Product.Price * (decimal)rp.Quantity), 2, MidpointRounding.AwayFromZero),
+                    Active=r.Active
                 }).ToArrayAsync();
             return model;
         }
@@ -90,6 +108,7 @@ namespace SweetAcademy.Services.Data
                     }).ToArray(),
                 }).FirstAsync();
             return model;
+
         }
 
         public async Task DeactivatedRecipeAsync(int id)
@@ -98,6 +117,17 @@ namespace SweetAcademy.Services.Data
             if (recipe != null)
             {
                 recipe.Active = false;
+                await dbContext.SaveChangesAsync();
+            }
+
+        }
+
+        public async Task ActivateRecipeAsync(int id)
+        {
+            var recipe = await dbContext.Recipes.FirstOrDefaultAsync(r=>r.Id==id);
+            if (recipe != null)
+            {
+                recipe.Active = true;
                 await dbContext.SaveChangesAsync();
             }
 
