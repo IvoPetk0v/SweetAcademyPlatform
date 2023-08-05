@@ -1,0 +1,52 @@
+﻿@model ICollection<TrainingViewModel>
+
+@{
+    ViewBag.Title = "All Trainings";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="text-center row">
+    @if (Model.Count > 0)
+    {
+        @foreach (var training in Model)
+        {
+            <div class="card col-4" style="width: 20rem; ">
+                <img src="@training.Recipe.ImageUrl" class="card-img-top img-fluid" alt="training image">
+                <div class="card-body">
+                    <h5 class="card-title mt-1 fs-4 fw-bold">@training.Name</h5>
+                    <br />
+                    <label class="text-secondary fw-bold fs-5">Description:</label>
+                    <p class="mb-0 ">@training.Recipe.Description</p>
+                    <label class="text-secondary fw-bold fs-5">Event starts on:</label>
+                    <p class="mb-0 ">@training.StartDate.ToString("f")</p>
+
+                </div>
+                <div class="row-3">
+
+                    <br/>
+                    <form class="input-group-sm" asp-area="" asp-controller="Training" asp-action="Details" asp-route-id="@training.Id" method="get">
+                        <input type="submit" value="Show details" class="fs-6 btn-sm btn-primary "/>
+                    </form>
+                    @if (User.IsInRole(RoleAdminName))
+                    {
+                        <hr/>
+                        <form class="input-group-sm" asp-area="Admin" asp-controller="Recipe" asp-action="Delete" asp-route-id="@training.Id"
+                              onsubmit="return confirm('Do you really want to delete the training?');">
+                            <input type="submit" value="Delete training" class="fs-6 btn-xs btn-danger "/>
+                        </form>
+                    }
+
+                    <br/>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <p>There is no added recipes yet!</p>
+        <p>May want to add some :   <a class="nav-link text-dark" asp-area="" asp-controller="Recipe" asp-action="AddRecipe">Click here to add recipe</a> </p>
+    }
+
+</div>

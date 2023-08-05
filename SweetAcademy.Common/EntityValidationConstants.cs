@@ -41,7 +41,6 @@
             public const double TaxPerTrainingForStudentMinValue = 0.00;
             public const double TaxPerTrainingForStudentMaxValue = 10000.00;
 
-            public const int PhoneNumMaxValue = 0999999999;
         }
     }
 }

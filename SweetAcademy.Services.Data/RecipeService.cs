@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+
 using SweetAcademy.Data;
 using SweetAcademy.Data.Models;
 using SweetAcademy.Services.Data.Interfaces;
