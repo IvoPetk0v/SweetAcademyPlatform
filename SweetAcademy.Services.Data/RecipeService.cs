@@ -111,7 +111,7 @@ namespace SweetAcademy.Services.Data
 
         }
 
-        public async Task DeactivatedRecipeAsync(int id)
+        public async Task DeactivateRecipeAsync(int id)
         {
             var recipe = await dbContext.Recipes.FirstOrDefaultAsync(r => r.Id == id);
             if (recipe != null)

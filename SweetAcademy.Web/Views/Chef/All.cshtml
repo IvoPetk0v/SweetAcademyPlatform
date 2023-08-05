@@ -1,0 +1,32 @@
+﻿@model ICollection<ChefViewModel>
+
+@{
+    ViewBag.Title = "All Chefs";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="text-center row">
+    @if (Model.Count > 0)
+    {
+        @foreach (var chef in Model)
+        {
+            if (chef.Active==true)
+            {
+                <div class="card col-4" style="width: 20rem; ">
+                    <img src="/18021.jpg" class="card-img-top img-fluid" alt="Chef img">
+                    <div class="card-body">
+                        <h5 class="card-title mt-1 fw-bold fs-4">Chef @chef.FullName</h5>
+                        <p class="mb-0"> Email: @chef.Email</p>
+                    </div>
+
+                </div>
+            }
+        }
+    }
+    else
+    {
+        <p>There is no added Chefs yet!</p>
+    }
+</div>

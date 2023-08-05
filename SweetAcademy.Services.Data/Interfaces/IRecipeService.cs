@@ -13,7 +13,7 @@ namespace SweetAcademy.Services.Data.Interfaces
         public Task<ICollection<ShowRecipeViewModel>> GetAllRecipesAsync();
 
         public Task<ShowRecipeViewModel> ShowFullRecipeInfoAsync(int id);
-        public Task DeactivatedRecipeAsync(int id);
+        public Task DeactivateRecipeAsync(int id);
         public Task ActivateRecipeAsync(int id);
 
     }

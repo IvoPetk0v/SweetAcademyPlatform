@@ -1,5 +1,67 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model ICollection<ChefViewModel>
+
 @{
+    ViewBag.Title = "All Chefs";
 }
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="text-center row">
+    @{
+        if (Model.Count > 0)
+        {
+            @foreach (var chef in Model)
+            {
+                <div class="card col-4" style="width: 20rem; ">
+                    <div class="card-body">
+                        <h5 class="card-title mt-1 fw-bold fs-4">Chef @chef.FullName</h5>
+                        @if (User.IsInRole(RoleAdminName))
+                        {
+                            <p class="mb-0"> Phone number: @chef.PhoneNumber</p>
+                        }
+                        <p class="mb-0"> Email: @chef.Email</p>
+                        @if (User.IsInRole(RoleAdminName))
+                        {
+                            <p class="mb-0 fw-bold fs-6">Charge per student for training: @chef.TaxPerTrainingForStudent BGN</p>
+                        }
+                    </div>
+                    @if (User.IsInRole(RoleAdminName))
+                    {
+                        <div class="row-3">
+                            <form class="input-group-sm" asp-area="Admin" asp-controller="Chef" asp-action="Edit" asp-route-id="@chef.Id" method="get">
+                                <input type="submit" value="Edit product" class="fs-6 btn-sm btn-success " />
+                            </form>
+                            <hr />
+                            @if (chef.Active)
+                            {
+                                <form class="input-group-sm" asp-area="Admin" asp-controller="Chef" asp-action="Delete" asp-route-id="@chef.Id"
+                                      onsubmit="return confirm('Do you really want to deactivate the Chef @chef.FullName ?');">
+                                    <input type="submit" value="Deactivate chef" class="fs-6 btn-xs btn-danger " />
+                                </form>
+                            }
+                            else
+                            {
+                                <form class="input-group-sm" asp-area="Admin" asp-controller="Chef" asp-action="Activate" asp-route-id="@chef.Id"
+                                      onsubmit="return confirm('Do you really want to activate again the product?');">
+                                    <input type="submit" value="Activate the product again" class="fs-6 btn-xs btn-danger " />
+                                </form>
+
+                            }
+
+                            <br />
+                        </div>
+
+                    }
+
+                </div>
+            }
+        }
+        else
+        {
+            <p>There is no added Chefs yet!</p>
+        }
+
+    }
+
+</div>

@@ -29,7 +29,7 @@ namespace SweetAcademy.Web.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
-            await recipeService.DeactivatedRecipeAsync(id);
+            await recipeService.DeactivateRecipeAsync(id);
             return RedirectToAction("AllRecipes");
         }
     }
