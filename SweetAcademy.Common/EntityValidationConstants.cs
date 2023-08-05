@@ -38,8 +38,8 @@
             public const int FullNameMaxLength = 50;
             public const int FullNameMinLength = 5;
 
-            public const decimal TaxPerTrainingForStudentMinValue = 0.00m;
-            public const decimal TaxPerTrainingForStudentMaxValue = 10000.00m;
+            public const double TaxPerTrainingForStudentMinValue = 0.00;
+            public const double TaxPerTrainingForStudentMaxValue = 10000.00;
 
             public const int PhoneNumMaxValue = 0999999999;
         }

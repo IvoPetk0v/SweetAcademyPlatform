@@ -15,6 +15,7 @@ namespace SweetAcademy.Data
         public DbSet<Recipe> Recipes { get; set; } = null!;
         public DbSet<RecipeProduct> RecipesProducts { get; set; } = null!;
         public DbSet<Training> Trainings { get; set; } = null!;
+        public DbSet<Chef> Chefs { get; set; }=null!;
 
         public SweetAcademyDbContext(DbContextOptions<SweetAcademyDbContext> options)
             : base(options)

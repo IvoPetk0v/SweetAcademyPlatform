@@ -1,4 +1,4 @@
-﻿using SweetAcademy.Web.ViewModels.Product;
+﻿
 using SweetAcademy.Web.ViewModels.Recipe;
 
 namespace SweetAcademy.Services.Data.Interfaces
