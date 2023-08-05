@@ -7,7 +7,7 @@ namespace SweetAcademy.Web.ViewModels.Chef
     {
         public ChefViewModel()
         {
-            this.CouchingSession = new HashSet<Training>();
+            this.CouchingSession = new HashSet<Data.Models.Training>();
         }
 
         public Guid Id { get; set; }
@@ -27,7 +27,7 @@ namespace SweetAcademy.Web.ViewModels.Chef
         [Range(TaxPerTrainingForStudentMinValue,TaxPerTrainingForStudentMaxValue)]
         public decimal TaxPerTrainingForStudent { get; set; }
 
-        public virtual ICollection<Training>? CouchingSession { get; set; }
+        public virtual ICollection<Data.Models.Training>? CouchingSession { get; set; }
 
       
         public bool Active { get; set; }

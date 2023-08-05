@@ -1,5 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
-
+@using SweetAcademy.Web.ViewModels.Training
 @model TrainingViewModel
 
 @{
@@ -11,16 +11,16 @@
 
 <div class="text-center row">
 
-
-    <div class="card col-4" style="width: 20rem; ">
-        <img src="@Model.Recipe.ImageUrl" class="card-img-top img-fluid" alt="training image">
+    <div class="card text-center" >
+        <img style="width: 15rem; text-align: center; margin: auto;" src="@Model.Recipe.ImageUrl" class="card-img-top img-fluid" alt="training image">
         <div class="card-body">
             <h5 class="card-title mt-1 fs-4 fw-bold">@Model.Name</h5>
             <br />
             <label class="text-secondary fw-bold fs-5">Description:</label>
-            <p class="mb-0 ">@Model.Recipe.Description</p>
+            <p class="mb-0 fw-bold ">@Model.Recipe.Description</p>
+            <br/>
             <label class="text-secondary fw-bold fs-5">Event starts on:</label>
-            <p class="mb-0 ">@Model.StartDate.ToString("f")</p>
+            <p class="mb-0 fw-bold ">@Model.StartDate.ToString("f")</p>
 
         </div>
         <div class="row-3">
@@ -29,12 +29,12 @@
                 if (seatsLeft == 1)
                 {
                     <label class="text-secondary fw-bold fs-5">Open seats left:</label>
-                    <p class="mb-0 text-warning">There`s only @seatsLeft left.Someone may take it just now.</p>
+                    <p class="mb-0 fw-bold text-danger ">There`s only @seatsLeft left.<br/><p class="mb-0 fw-bold text-warning">Someone may take it just now.</p></p>
                 }
                 else
                 {
                     <label class="text-secondary fw-bold fs-5">Open seats left:</label>
-                    <p class="mb-0 "> There are @seatsLeft seats. You are welcome to join in.</p>
+                    <p class="mb-0 fw-bold text-success"> There are @seatsLeft seats.<br/> <p class="mb-0 fw-bold">You are welcome to join in.</p></p>
                 }
 
                 decimal recipeTotalPrice = Model.Recipe.RecipeProducts
@@ -44,13 +44,13 @@
                 recipeTotalPrice + Model.Trainer.TaxPerTrainingForStudent + PlatformInterestForTrainingSession;
 
                 totalPrice = decimal.Round(totalPrice, 2, MidpointRounding.AwayFromZero);
-
+                <br/>
                 <div>
                     <p class="mb-0 fw-bold  fs-5"> <label class="text fs-5">Total price: </label> @totalPrice BGN</p>
                 </div>
 
                 <form class="input-group-sm" asp-area="" asp-controller="Order" asp-action="Register" method="post" asp-route-id="@Model.Id">
-                    <input type="submit" value="Book your seat for the training" class="fs-6 btn-sm btn-primary " />
+                    <input type="submit" value="Book your seat for the training" class="fs-6 btn-sm btn-success " />
                 </form>
             }
 

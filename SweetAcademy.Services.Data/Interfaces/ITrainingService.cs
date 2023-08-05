@@ -5,6 +5,7 @@ namespace SweetAcademy.Services.Data.Interfaces
 {
     public interface ITrainingService
     {
-        Task<ICollection<TrainingViewModel>> GetAllTrainingAsync();
+        Task<ICollection<TrainingViewModel>> GetAllActiveTrainingAsync();
+        Task<TrainingViewModel> ShowDetailsByIdAsync(int id);
     }
 }

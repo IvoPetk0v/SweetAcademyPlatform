@@ -1,5 +1,4 @@
 ﻿
-
 using SweetAcademy.Data.Models;
 
 namespace SweetAcademy.Web.ViewModels.User
@@ -10,7 +9,7 @@ namespace SweetAcademy.Web.ViewModels.User
         public string UserName { get; set; } = null!;
 
         public virtual ICollection<Order>? Orders { get; set; }
-        public virtual ICollection<Training>? Training { get; set; }
+        public virtual ICollection<Data.Models.Training>? Trainings { get; set; }
 
         public virtual Data.Models.Chef? Chef { get; set; }
 

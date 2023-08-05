@@ -17,7 +17,7 @@
             public const int ImageUrlMinLength = 10;
         }
 
-        public static class Training
+        public static class TrainingValidation
         {
             public const int NameMaxLength = 100;
             public const int NameMinLength = 10;

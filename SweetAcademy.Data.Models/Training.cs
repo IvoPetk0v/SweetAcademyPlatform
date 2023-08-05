@@ -1,8 +1,7 @@
-﻿using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-using static SweetAcademy.Common.EntityValidationConstants.Training;
+using static SweetAcademy.Common.EntityValidationConstants.TrainingValidation;
 
 namespace SweetAcademy.Data.Models
 {
