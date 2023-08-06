@@ -27,10 +27,26 @@
                 <div class="row-3">
 
                     <br/>
-                    <form class="input-group-sm" asp-area="" asp-controller="Training" asp-action="Details" asp-route-id="@training.Id" method="get">
+                    <form class="input-group-sm" asp-area="Admin" asp-controller="Training" asp-action="Details" asp-route-id="@training.Id" method="get">
                         <input type="submit" value="Show details" class="fs-6 btn-sm btn-primary "/>
                     </form>
-
+                   
+                        @if (training.Active)
+                        {
+                            <hr/>
+                            <form class="input-group-sm" asp-area="Admin" asp-controller="Training" asp-action="Delete" asp-route-id="@training.Id"
+                                  onsubmit="return confirm('Do you really want to delete the training?');">
+                                <input type="submit" value="Delete training" class="fs-6 btn-xs btn-danger "/>
+                            </form>
+                        }
+                        else
+                        {
+                            <hr/>
+                            <form class="input-group-sm" asp-area="Admin" asp-controller="Training" asp-action="Activate" asp-route-id="@training.Id"
+                                  onsubmit="return confirm('Do you really want to activate again the training?');">
+                                <input type="submit" value="Activate the training" class="fs-6 btn-xs btn-danger "/>
+                            </form>
+                        }
                     <br/>
                 </div>
             </div>
@@ -39,7 +55,6 @@
     else
     {
         <p>There is no added trainings yet!</p>
-       
     }
 
 </div>

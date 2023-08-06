@@ -1,9 +1,8 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 using SweetAcademy.Services.Data.Interfaces;
 using SweetAcademy.Web.ViewModels.Recipe;
-using static SweetAcademy.Common.GeneralApplicationConstants;
+
 
 namespace SweetAcademy.Web.Controllers
 {

@@ -1,0 +1,80 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model TrainingViewModel
+
+@{
+    ViewBag.Title = "Full information for the training";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="text-center row">
+
+    <div class="card text-center" >
+        <img style="width: 15rem; text-align: center; margin: auto;" src="@Model.Recipe.ImageUrl" class="card-img-top img-fluid" alt="training image">
+        <div class="card-body">
+            <h5 class="card-title mt-1 fs-4 fw-bold">@Model.Name</h5>
+            <br />
+            <label class="text-secondary fw-bold fs-5">Description:</label>
+            <p class="mb-0 fw-bold ">@Model.Recipe.Description</p>
+            <br/>
+            <label class="text-secondary fw-bold fs-5">Event starts on:</label>
+            <p class="mb-0 fw-bold ">@Model.StartDate.ToString("f")</p>
+
+        </div>
+        <div class="row-3">
+            @{
+                int seatsLeft = Model.OpenSeats - Model.Participators.Count;
+                if (seatsLeft == 1)
+                {
+                    <label class="text-secondary fw-bold fs-5">Open seats left:</label>
+                    <p class="mb-0 fw-bold text-danger ">There`s only @seatsLeft left.<br/><p class="mb-0 fw-bold text-warning">Someone may take it just now.</p></p>
+                }
+                else
+                {
+                    <label class="text-secondary fw-bold fs-5">Open seats left:</label>
+                    <p class="mb-0 fw-bold text-success"> There are @seatsLeft seats.<br/> <p class="mb-0 fw-bold">You are welcome to join in.</p></p>
+                }
+
+                decimal recipeTotalPrice = Model.Recipe.RecipeProducts
+                .Sum(rp => rp.Product.Price * (decimal)rp.Quantity);
+
+                decimal totalPrice =
+                (recipeTotalPrice + Model.Trainer.TaxPerTrainingForStudent) * PlatformInterestForTrainingSession;
+
+                totalPrice = decimal.Round(totalPrice, 2, MidpointRounding.AwayFromZero);
+                <br/>
+                <div>
+                    <p class="mb-0 fw-bold  fs-5"> <label class="text fs-5">Total price: </label> @totalPrice BGN</p>
+                </div>
+
+                <form class="input-group-sm" asp-area="Admin" asp-controller="Order" asp-action="Register" method="post" asp-route-id="@Model.Id">
+                    <input type="submit" value="Book your seat for the training" class="fs-6 btn-sm btn-success " />
+                </form>
+            }
+
+            <br />
+            <form class="input-group-sm" asp-area="Admin" asp-controller="Training" asp-action="All" method="get">
+                <input type="submit" value="Back to all trainings" class="fs-6 btn-sm btn-primary " />
+            </form>
+            @if (Model.Active)
+                {
+                    <hr/>
+                    <form class="input-group-sm" asp-area="Admin" asp-controller="Training" asp-action="Delete" asp-route-id="@Model.Id"
+                          onsubmit="return confirm('Do you really want to delete the training?');">
+                        <input type="submit" value="Delete training" class="fs-6 btn-xs btn-danger "/>
+                    </form>
+                }
+                else
+                {
+                    <hr/>
+                    <form class="input-group-sm" asp-area="Admin" asp-controller="Training" asp-action="Activate" asp-route-id="@Model.Id"
+                          onsubmit="return confirm('Do you really want to activate again the training?');">
+                        <input type="submit" value="Activate the training" class="fs-6 btn-xs btn-danger "/>
+                    </form>
+                }
+
+            <br />
+        </div>
+    </div>
+</div>

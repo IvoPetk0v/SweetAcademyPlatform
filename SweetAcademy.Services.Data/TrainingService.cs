@@ -38,7 +38,29 @@ namespace SweetAcademy.Services.Data
          
             return model;
         }
+        public async Task<ICollection<TrainingViewModel>> GetAllTrainingAsync()
+        {
 
+            var model = await dbContext.Trainings
+                .Include(t => t.Recipe)
+                .ThenInclude(t => t.RecipeProducts)
+                .Include(t => t.Trainer)
+                .Select(t => new TrainingViewModel()
+                {
+                    Id = t.Id,
+                    Name = t.Name,
+                    Recipe = t.Recipe,
+                    Trainer = t.Trainer,
+                    Active = t.Active,
+                    StartDate = t.StartDate,
+                    ChefId = t.ChefId,
+                    OpenSeats = t.OpenSeats,
+                    Participators = t.Participators,
+                    RecipeId = t.RecipeId
+                }).ToArrayAsync();
+
+            return model;
+        }
         public async Task<TrainingViewModel> ShowDetailsByIdAsync(int id)
         {
             var training = await dbContext.Trainings
@@ -65,6 +87,31 @@ namespace SweetAcademy.Services.Data
                 Trainer = training.Trainer
             };
             return model;
+        }
+
+        public async Task DeActivateByIdAsync(int id)
+        {
+            var training = await this.dbContext.Trainings.FindAsync(id);
+            if (training != null)
+            {
+                training.Active = false;
+                await dbContext.SaveChangesAsync();
+                return;
+            }
+
+            throw new NullReferenceException();
+        }
+
+        public async Task ActivateByIdAsync(int id)
+        {
+            var training = await this.dbContext.Trainings.FindAsync(id);
+            if (training != null)
+            {
+                training.Active = true;
+                await dbContext.SaveChangesAsync();
+                return;
+            }
+            throw new NullReferenceException();
         }
     }
 }
