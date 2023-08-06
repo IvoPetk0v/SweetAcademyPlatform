@@ -26,7 +26,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand fs-5 fw-bold" asp-area="" asp-controller="Home" asp-action="Index">Steff`s Sweet Academy &trade;</a>
+                <a class="navbar-brand fs-5 fw-bold ms-3" asp-area="" asp-controller="Home" asp-action="Index">Steff`s Sweet Academy &trade;</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -42,19 +42,19 @@
 
                                 <ul class="dropdown-menu fw-bold">
                                     <li class="nav-item">
-                                        <a class="nav-link text-dark" asp-area="Admin" asp-controller="Product" asp-action="AllProducts">All Products</a>
+                                        <a class="nav-link text-center text-dark fw-bold bg-primary" asp-area="Admin" asp-controller="Product" asp-action="AllProducts">All Products</a>
                                     </li>
                                     <hr/>
                                     <li class="nav-item">
-                                        <a class="nav-link text-dark" asp-area="Admin" asp-controller="Recipe" asp-action="AllRecipes">All Recipes</a>
+                                        <a class="nav-link text-center text-dark fw-bold bg-primary" asp-area="Admin" asp-controller="Recipe" asp-action="AllRecipes">All Recipes</a>
                                     </li>
                                     <hr>
                                     <li class="nav-item">
-                                        <a class="nav-link text-dark" asp-area="Admin" asp-controller="Chef" asp-action="All">All Chefs</a>
+                                        <a class="nav-link text-center text-dark fw-bold bg-primary" asp-area="Admin" asp-controller="Chef" asp-action="All">All Chefs</a>
                                     </li>
                                     <hr>
                                     <li class="nav-item">
-                                        <a class="nav-link text-dark" asp-area="Admin" asp-controller="Training" asp-action="All">All Trainings</a>
+                                        <a class="nav-link  text-center text-dark fw-bold bg-primary" asp-area="Admin" asp-controller="Training" asp-action="All">All Trainings</a>
                                     </li>
                                 </ul>
                             </div>
@@ -65,21 +65,21 @@
 
                                 <ul class="dropdown-menu fw-bold">
                                     <li class="nav-item">
-                                        <a class="nav-link text-dark" asp-area="Admin" asp-controller="Product" asp-action="AddProducts">Add Products</a>
+                                        <a class="nav-link text-center text-dark fw-bold bg-success" asp-area="Admin" asp-controller="Product" asp-action="AddProducts">Add Products</a>
                                     </li>
                                     <hr/>
                                     <li class="nav-item">
-                                        <a class="nav-link text-dark" asp-area="" asp-controller="Recipe" asp-action="AddRecipe">Add Recipe</a>
+                                        <a class="nav-link text-center text-dark fw-bold bg-success" asp-area="" asp-controller="Recipe" asp-action="AddRecipe">Add Recipe</a>
                                     </li>
                                     <hr/>
                                     <li class="nav-item">
-                                        <a class="nav-link text-dark" asp-area="Admin" asp-controller="Chef" asp-action="Add">Add Chef</a>
+                                        <a class="nav-link text-center text-dark fw-bold bg-success" asp-area="Admin" asp-controller="Chef" asp-action="Add">Add Chef</a>
                                     </li>
                                     @if (IsChef)
                                     {
                                         <hr />
                                     <li class="nav-item">
-                                        <a class="nav-link text-dark" asp-area="" asp-controller="Training" asp-action="Add">Add Training</a>
+                                            <a class="nav-link text-center text-dark fw-bold bg-success" asp-area="" asp-controller="Training" asp-action="Add">Add Training</a>
                                     </li>
                                     }
                                 </ul>
@@ -90,27 +90,29 @@
                         else
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                                <a class="nav-link text-dark fw-bold bg-secondary border border-5 rounded-pill ms-3" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark fw-bold bg-primary border border-5 rounded-pill ms-5" asp-area="" asp-controller="Product" asp-action="AllProducts">All Products</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="AllProducts">All Products</a>
+                                <a class="nav-link text-dark fw-bold bg-primary border border-5 rounded-pill" asp-area="" asp-controller="Recipe" asp-action="AllRecipes">All Recipes</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Recipe" asp-action="AllRecipes">All Recipes</a>
+                                <a class="nav-link text-dark fw-bold bg-primary border border-5 rounded-pill" asp-area="" asp-controller="Chef" asp-action="All">All Chefs</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Chef" asp-action="All">All Chefs</a>
+                                <a class="nav-link text-dark fw-bold bg-primary border border-5 rounded-pill" asp-area="" asp-controller="Training" asp-action="All">All Trainings</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Training" asp-action="All">All Trainings</a>
+                                <a class="nav-link text-dark fw-bold bg-success border border-5 rounded-pill ms-5" asp-area="" asp-controller="Recipe" asp-action="AddRecipe">Add Recipe</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Recipe" asp-action="AddRecipe">Add Recipe</a>
-                            </li>
+                            
                             if (IsChef)
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Training" asp-action="Add">Add Training</a>
+                                    <a class="nav-link text-dark fw-bold bg-success border border-5 rounded-pill" asp-area="" asp-controller="Training" asp-action="Add">Add Training</a>
                                 </li>
                             }
                         }
