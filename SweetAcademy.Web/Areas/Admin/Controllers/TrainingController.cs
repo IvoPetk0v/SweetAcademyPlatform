@@ -1,18 +1,23 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿
 using Microsoft.AspNetCore.Mvc;
-using SweetAcademy.Services.Data;
+
 using SweetAcademy.Services.Data.Interfaces;
-using System.Data;
+using SweetAcademy.Web.ViewModels.Training;
+
 
 namespace SweetAcademy.Web.Areas.Admin.Controllers
 {
     public class TrainingController : BaseAdminController
     {
         private readonly ITrainingService trainingService;
+        private readonly IRecipeService recipeService;
 
-        public TrainingController(ITrainingService service)
+        public TrainingController(ITrainingService service, IRecipeService recipeService)
         {
             this.trainingService = service;
+            this.recipeService = recipeService;
+            this.recipeService = recipeService;
+
         }
         public async Task<IActionResult> All()
         {
@@ -61,5 +66,6 @@ namespace SweetAcademy.Web.Areas.Admin.Controllers
                 return BadRequest(e.Message);
             }
         }
+
     }
 }

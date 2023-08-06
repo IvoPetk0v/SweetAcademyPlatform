@@ -21,6 +21,8 @@
         {
             public const int NameMaxLength = 100;
             public const int NameMinLength = 10;
+
+            public const int KitchenMaxSlots = 8;
         }
 
         public static class Product

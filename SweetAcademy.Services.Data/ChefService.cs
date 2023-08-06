@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿
+using Microsoft.EntityFrameworkCore;
 
 using SweetAcademy.Data;
 using SweetAcademy.Data.Models;
@@ -110,6 +111,22 @@ namespace SweetAcademy.Services.Data
                 chef.Active = true;
                 await dbContext.SaveChangesAsync();
             }
+        }
+
+        public async Task<Guid> GetChefIdByUserIdAsync(Guid userId)
+        {
+            var chef = await dbContext.Chefs.FirstOrDefaultAsync(c => c.ApplicationUserId == userId);
+            if (chef != null)
+            {
+                return chef!.Id;
+            }
+
+            throw new NullReferenceException();
+
+        }
+        public async Task<bool> ChefExistByUserIdAsync(Guid userId)
+        {
+          return await dbContext.Chefs.AnyAsync(c => c.ApplicationUserId == userId);
         }
     }
 }

@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 
 using SweetAcademy.Data;
+using SweetAcademy.Data.Models;
 using SweetAcademy.Services.Data.Interfaces;
 using SweetAcademy.Web.ViewModels.Training;
 
@@ -112,6 +113,32 @@ namespace SweetAcademy.Services.Data
                 return;
             }
             throw new NullReferenceException();
+        }
+
+        public async Task AddTrainingAsync(AddTrainingViewModel model)
+        {
+            var training = new Training()
+            {
+                Name = model.Name,
+                ChefId = model.ChefId,
+                RecipeId = model.RecipeId,
+                StartDate = model.StartDate,
+                OpenSeats = model.OpenSeats,
+                Active = true
+            };
+            await dbContext.Trainings.AddAsync(training);
+            await dbContext.SaveChangesAsync();
+        }
+
+        public async Task<ICollection<DateTime>> GetTrainingDateAsync()
+        {
+
+            var dates= await dbContext.Trainings
+                .Where(t => t.Active)
+                .Select(t => t.StartDate.Date)
+                .ToArrayAsync();
+            return dates;
+         
         }
     }
 }

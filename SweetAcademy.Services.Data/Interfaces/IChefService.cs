@@ -12,5 +12,7 @@ namespace SweetAcademy.Services.Data.Interfaces
         public Task EditAsync (ChefViewModel model);
         public Task DeactivateChefAsync(Guid id);
         public Task ActivateRecipeAsync(Guid id);
+        public Task<Guid> GetChefIdByUserIdAsync(Guid userId);
+        public Task<bool> ChefExistByUserIdAsync(Guid userId);
     }
 }

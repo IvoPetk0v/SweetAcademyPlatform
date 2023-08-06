@@ -1,4 +1,18 @@
-﻿<!DOCTYPE html>
+﻿@using System.Security.Claims
+@using SweetAcademy.Services.Data.Interfaces
+@inject IChefService ChefService
+@{
+    bool IsChef = false;
+    if (User.Identity.Name!=null)
+    {
+        Guid userId =Guid.Parse( User.FindFirstValue(ClaimTypes.NameIdentifier));
+         IsChef = await ChefService.ChefExistByUserIdAsync(userId);
+    }
+   
+}
+
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -61,6 +75,13 @@
                                     <li class="nav-item">
                                         <a class="nav-link text-dark" asp-area="Admin" asp-controller="Chef" asp-action="Add">Add Chef</a>
                                     </li>
+                                    @if (IsChef)
+                                    {
+                                        <hr />
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Training" asp-action="Add">Add Training</a>
+                                    </li>
+                                    }
                                 </ul>
                             </div>
                          
@@ -86,6 +107,12 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Recipe" asp-action="AddRecipe">Add Recipe</a>
                             </li>
+                            if (IsChef)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Training" asp-action="Add">Add Training</a>
+                                </li>
+                            }
                         }
                      
                       

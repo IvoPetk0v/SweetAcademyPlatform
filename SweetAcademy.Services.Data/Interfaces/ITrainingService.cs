@@ -12,5 +12,9 @@ namespace SweetAcademy.Services.Data.Interfaces
         Task DeActivateByIdAsync(int id);
 
         Task ActivateByIdAsync(int id);
+
+        Task AddTrainingAsync(AddTrainingViewModel model);
+
+        Task<ICollection<DateTime>> GetTrainingDateAsync();
     }
 }

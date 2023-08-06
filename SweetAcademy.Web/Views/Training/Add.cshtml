@@ -1,0 +1,60 @@
+﻿@model AddTrainingViewModel
+
+@using System.Security.Claims
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+
+@using SweetAcademy.Services.Data.Interfaces
+
+@inject IChefService ChefService
+
+@{
+    ViewData["Title"] = "Add Training";
+
+    Guid userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+    
+    Guid chefId = await ChefService.GetChefIdByUserIdAsync(userId);
+
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+<div class="row">
+    <div class="col-sm-12 offset-lg-8 offset-xl-3 col-xl-6">
+        <form asp-area="" asp-controller="Training" asp-action="Add" method="post">
+            <div class="mb-3">
+                <label asp-for="@Model.Recipes" class="form-label">Training for Recipe:</label>
+                <select class="form-select" asp-for="RecipeId">
+                    <option  value="">Choose from Recipes</option>
+                    @foreach (var r in Model.Recipes)
+                    {
+                        <option value="@r.Id">@r.Name</option>
+                    }
+                </select>
+                <span  asp-validation-for="@Model.RecipeId" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="@Model.Name" class="form-label">Training name</label>
+                <input asp-for="@Model.Name" class="form-control" aria-required="true" placeholder="Training name" />
+                <span asp-validation-for="@Model.Name" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="@Model.OpenSeats" class="form-label">Open seats in the kitchen</label>
+                <input asp-for="@Model.OpenSeats" class="form-control" aria-required="true" type="number" step="1" value="1"/>
+                <span asp-validation-for="@Model.OpenSeats" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="@Model.StartDate" class="form-label">Event start at</label>
+                <input asp-for="@Model.StartDate" class="form-control" aria-required="true" value="@DateTime.Now.ToString("yyyy-MM-dd H:mm")" />
+                <span asp-validation-for="@Model.StartDate"  class="text-danger"></span>
+            </div>
+            <div class="mb-3 d-none">
+                <input asp-for="@Model.ChefId" class="form-control" aria-required="true" value="@chefId" />
+            </div>
+         
+            <div class="mb-3">
+                <input class="btn btn-warning mb-2 w-100 p-3 fw-bold" type="submit" value="Add The Training" />
+            </div>
+
+        </form>
+    </div>
+</div>
