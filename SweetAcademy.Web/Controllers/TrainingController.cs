@@ -1,9 +1,8 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualBasic;
 using SweetAcademy.Services.Data.Interfaces;
 using SweetAcademy.Web.ViewModels.Training;
-using static SweetAcademy.Common.GeneralApplicationConstants;
+
 
 namespace SweetAcademy.Web.Controllers
 {
@@ -19,6 +18,7 @@ namespace SweetAcademy.Web.Controllers
         }
         public async Task<IActionResult> All()
         {
+            ViewBag.IsFilteredByChefId = false;
             var model = await trainingService.GetAllActiveTrainingAsync();
             return View(model);
         }
@@ -84,6 +84,13 @@ namespace SweetAcademy.Web.Controllers
             {
                 return BadRequest(error: "Something get wrong adding this training.Please try again or contact Administration.");
             }
+        }
+        [HttpGet]
+        public async Task<IActionResult> AllByChef(Guid id)
+        {
+            ViewBag.IsFilteredByChefId = true;
+           var model =await trainingService.AllByChef(id);
+           return View("All", model);
         }
     }
 }

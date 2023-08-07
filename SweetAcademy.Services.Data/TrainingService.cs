@@ -1,6 +1,6 @@
 ﻿using System.Data;
 using Microsoft.EntityFrameworkCore;
-
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using SweetAcademy.Data;
 using SweetAcademy.Data.Models;
 using SweetAcademy.Services.Data.Interfaces;
@@ -139,6 +139,29 @@ namespace SweetAcademy.Services.Data
                 .ToArrayAsync();
             return dates;
          
+        }
+
+        public async Task<ICollection<TrainingViewModel>> AllByChef(Guid chefId)
+        {
+            var model = await dbContext.Trainings.Where(t=>t.ChefId==chefId)
+                .Include(t => t.Recipe)
+                .ThenInclude(t => t.RecipeProducts)
+                .Include(t => t.Trainer)
+                .Select(t => new TrainingViewModel()
+                {
+                    Id = t.Id,
+                    Name = t.Name,
+                    Recipe = t.Recipe,
+                    Trainer = t.Trainer,
+                    Active = t.Active,
+                    StartDate = t.StartDate,
+                    ChefId = t.ChefId,
+                    OpenSeats = t.OpenSeats,
+                    Participators = t.Participators,
+                    RecipeId = t.RecipeId
+                }).OrderByDescending(t=>t.Active).ThenBy(t=>t.StartDate.Date).ToArrayAsync();
+
+            return model;
         }
     }
 }

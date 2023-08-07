@@ -16,5 +16,6 @@ namespace SweetAcademy.Services.Data.Interfaces
         Task AddTrainingAsync(AddTrainingViewModel model);
 
         Task<ICollection<DateTime>> GetTrainingDateAsync();
+        Task<ICollection<TrainingViewModel>> AllByChef(Guid chefId);
     }
 }

@@ -1,8 +1,7 @@
-﻿
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 using SweetAcademy.Services.Data.Interfaces;
-using SweetAcademy.Web.ViewModels.Training;
+
 
 
 namespace SweetAcademy.Web.Areas.Admin.Controllers
@@ -16,7 +15,7 @@ namespace SweetAcademy.Web.Areas.Admin.Controllers
         {
             this.trainingService = service;
             this.recipeService = recipeService;
-            this.recipeService = recipeService;
+           
 
         }
         public async Task<IActionResult> All()
