@@ -24,30 +24,40 @@
 
 <h2 class="text-center">@ViewBag.Title</h2>
 <hr />
-
-@if (IsChef)
-{
-    <div class="row text-center">
-        <div class="col-md-6">
-            <form class="btn btn-sm position-relative top-10 start-0" asp-area="" asp-controller="Training" asp-action="AllByChef" asp-route-id="@chef.Id" method="get">
-                <input type="submit" value="Show only owned by Chef, @chef.FullName " class="fs-6 btn-sm btn-success " />
-            </form>
-        </div>
-        @if (@ViewBag.IsFilteredByChefId)
-        {
-            <div class="col-md-6">
-                <form class="btn btn-sm position-relative top-15 end-5" asp-area="" asp-controller="Training" asp-action="All" method="get">
-                    <input type="submit" value="Get back to all trainings " class="fs-6 btn-sm btn-primary " />
-                </form>
-            </div>
-        }
-    </div>
-}
-
-<hr />
 <div class="text-center row">
     @if (Model.Count > 0)
     {
+        @if (IsChef)
+        {
+            <div class="row text-center">
+                <div class="col-md-6">
+                    <form class="btn btn-sm position-relative top-10 start-0" asp-area="" asp-controller="Training" asp-action="AllByChef" asp-route-id="@chef.Id" method="get">
+                        <input type="submit" value="Show only owned by Chef, @chef.FullName " class="fs-6 btn-sm btn-success " />
+                    </form>
+                </div>
+                @if (@ViewBag.IsFilteredByChefId)
+                {
+                    if (User.IsInRole(RoleAdminName))
+                    {
+                        <div class="col-md-6">
+                            <form class="btn btn-sm position-relative top-15 end-5" asp-area="Admin" asp-controller="Training" asp-action="All" method="get">
+                                <input type="submit" value="Back to View as Admin " class="fs-6 btn-sm btn-primary " />
+                            </form>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-md-6">
+                            <form class="btn btn-sm position-relative top-15 end-5" asp-area="" asp-controller="Training" asp-action="All" method="get">
+                                <input type="submit" value="Get back to all trainings " class="fs-6 btn-sm btn-primary " />
+                            </form>
+                        </div>
+                    }
+                  
+                }
+            </div>
+            <hr />
+        }
         @foreach (var training in Model)
         {
             <div class="card col-4" style="width: 20rem; ">

@@ -1,7 +1,23 @@
 ﻿@model ICollection<TrainingViewModel>
+@using System.Security.Claims
+@using SweetAcademy.Services.Data.Interfaces
+@inject IChefService ChefService
 
 @{
     ViewBag.Title = "All Trainings";
+
+    bool IsChef = false;
+    ChefViewModel chef = null;
+
+    if (User.Identity.Name != null)
+    {
+        Guid userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+        IsChef = await ChefService.ChefExistByUserIdAsync(userId);
+        if (IsChef)
+        {
+            chef = await ChefService.GetChefByIdAsync(await ChefService.GetChefIdByUserIdAsync(userId));
+        }
+    }
 }
 
 <h2 class="text-center">@ViewBag.Title</h2>
@@ -10,6 +26,17 @@
 <div class="text-center row">
     @if (Model.Count > 0)
     {
+        @if (IsChef)
+        {
+            <div class="row text-center">
+                <div class="col-md-6">
+                    <form class="btn btn-sm position-relative top-10 start-0" asp-area="" asp-controller="Training" asp-action="AllByChef" asp-route-id="@chef.Id" method="get">
+                        <input type="submit" value="View all as a Chef" class="fs-6 btn-sm btn-success " />
+                    </form>
+                </div>
+            </div>
+            <hr />
+        }
         @foreach (var training in Model)
         {
             <div class="card col-4" style="width: 20rem; ">
@@ -19,35 +46,35 @@
                     <br />
                     <label class="text-secondary fw-bold fs-5">Description:</label>
                     <p class="mb-0 ">@training.Recipe.Description</p>
-                    <br/>
+                    <br />
                     <label class="text-secondary fw-bold fs-5">Event starts on:</label>
                     <p class="mb-0 fw-bold text-dark">@training.StartDate.ToString("f")</p>
 
                 </div>
                 <div class="row-3">
 
-                    <br/>
+                    <br />
                     <form class="input-group-sm" asp-area="Admin" asp-controller="Training" asp-action="Details" asp-route-id="@training.Id" method="get">
-                        <input type="submit" value="Show details" class="fs-6 btn-sm btn-primary "/>
+                        <input type="submit" value="Show details" class="fs-6 btn-sm btn-primary " />
                     </form>
-                   
-                        @if (training.Active)
-                        {
-                            <hr/>
-                            <form class="input-group-sm" asp-area="Admin" asp-controller="Training" asp-action="Delete" asp-route-id="@training.Id"
-                                  onsubmit="return confirm('Do you really want to delete the training?');">
-                                <input type="submit" value="Delete training" class="fs-6 btn-xs btn-danger "/>
-                            </form>
-                        }
-                        else
-                        {
-                            <hr/>
-                            <form class="input-group-sm" asp-area="Admin" asp-controller="Training" asp-action="Activate" asp-route-id="@training.Id"
-                                  onsubmit="return confirm('Do you really want to activate again the training?');">
-                                <input type="submit" value="Activate the training" class="fs-6 btn-xs btn-danger "/>
-                            </form>
-                        }
-                    <br/>
+
+                    @if (training.Active)
+                    {
+                        <hr />
+                        <form class="input-group-sm" asp-area="Admin" asp-controller="Training" asp-action="Delete" asp-route-id="@training.Id"
+                              onsubmit="return confirm('Do you really want to delete the training?');">
+                            <input type="submit" value="Delete training" class="fs-6 btn-xs btn-danger " />
+                        </form>
+                    }
+                    else
+                    {
+                        <hr />
+                        <form class="input-group-sm" asp-area="Admin" asp-controller="Training" asp-action="Activate" asp-route-id="@training.Id"
+                              onsubmit="return confirm('Do you really want to activate again the training?');">
+                            <input type="submit" value="Activate the training" class="fs-6 btn-xs btn-danger " />
+                        </form>
+                    }
+                    <br />
                 </div>
             </div>
         }
