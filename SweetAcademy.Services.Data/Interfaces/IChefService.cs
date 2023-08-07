@@ -7,7 +7,7 @@ namespace SweetAcademy.Services.Data.Interfaces
         public Task AddChefAsync (AddChefViewModel model);
         public Task<AddChefViewModel> LoadChefAddViewModelAsync();
 
-        public Task<ICollection<ChefViewModel>> GetAllChefs();
+        public Task<ICollection<ChefViewModel>> GetAllChefsAsync();
         public Task<ChefViewModel> GetChefByIdAsync(Guid id);
         public Task EditAsync (ChefViewModel model);
         public Task DeactivateChefAsync(Guid id);

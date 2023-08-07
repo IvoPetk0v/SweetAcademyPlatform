@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using SweetAcademy.Web.ViewModels.Chef;
 using SweetAcademy.Web.ViewModels.Recipe;
 using static SweetAcademy.Common.EntityValidationConstants.TrainingValidation;
 
@@ -9,6 +10,7 @@ namespace SweetAcademy.Web.ViewModels.Training
         public AddTrainingViewModel()
         {
             this.Recipes = new HashSet<ShowRecipeViewModel>();
+            this.Chefs=new HashSet<ChefViewModel>();
         }
 
         public int Id { get; set; }
@@ -29,6 +31,8 @@ namespace SweetAcademy.Web.ViewModels.Training
 
         [Required]
         public Guid ChefId { get; set; }
+
+        public ICollection<ChefViewModel> Chefs { get; set; }
 
         public ICollection<ShowRecipeViewModel> Recipes { get; set; }
 

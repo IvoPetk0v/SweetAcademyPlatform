@@ -15,7 +15,7 @@ namespace SweetAcademy.Web.Controllers
 
         public async Task<IActionResult>  All()
         {
-            var model = await chefService.GetAllChefs();
+            var model = await chefService.GetAllChefsAsync();
             return View(model);
         }
     }

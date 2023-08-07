@@ -45,7 +45,7 @@ namespace SweetAcademy.Services.Data
             return model;
         }
 
-        public async Task<ICollection<ChefViewModel>> GetAllChefs()
+        public async Task<ICollection<ChefViewModel>> GetAllChefsAsync()
         {
             var model = await dbContext.Chefs.Include(c => c.User).Select(c => new ChefViewModel()
             {
