@@ -4,7 +4,8 @@ namespace SweetAcademy.Web.Controllers
 {
     public class OrderController : BaseController
     {
-        public IActionResult Register()
+        [HttpGet]
+        public IActionResult Register(int id)
         {
             return View();
         }

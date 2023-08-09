@@ -6,7 +6,7 @@ namespace SweetAcademy.Web.Controllers
    
     public class ChefController : BaseController
     {
-        private IChefService chefService;
+        private readonly IChefService chefService;
 
         public ChefController(IChefService service)
         {

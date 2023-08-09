@@ -1,5 +1,4 @@
-﻿using System.Security.Claims;
-
+﻿
 using Microsoft.AspNetCore.Mvc;
 
 using SweetAcademy.Services.Data.Interfaces;
@@ -10,7 +9,7 @@ namespace SweetAcademy.Web.Areas.Admin.Controllers
 {
     public class ChefController : BaseAdminController
     {
-        private IChefService chefService;
+        private readonly IChefService chefService;
 
         public ChefController(IChefService service)
         {
@@ -65,7 +64,6 @@ namespace SweetAcademy.Web.Areas.Admin.Controllers
             {
                 return BadRequest(e.Message);
             }
-
         }
 
         [HttpPost]
@@ -98,7 +96,6 @@ namespace SweetAcademy.Web.Areas.Admin.Controllers
             {
               return BadRequest(e.Message);
             }
-           
         }
 
         [HttpPost]
@@ -114,7 +111,6 @@ namespace SweetAcademy.Web.Areas.Admin.Controllers
             {
                 return BadRequest(e.Message);
             }
-         
         }
     }
 }

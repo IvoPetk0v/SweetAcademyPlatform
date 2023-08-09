@@ -11,7 +11,7 @@ namespace SweetAcademy.Services.Data
     public class TrainingService : ITrainingService
     {
         private readonly SweetAcademyDbContext dbContext;
-        public TrainingService(SweetAcademyDbContext context,IRecipeService service)
+        public TrainingService(SweetAcademyDbContext context)
         {
             this.dbContext = context;
         }

@@ -30,6 +30,7 @@ namespace SweetAcademy.Web.ViewModels.Chef
         [Required]
         public bool Active { get; set; }
 
+        [Required]
         public ICollection<UserViewModel> Users { get; set; } 
     }
 }

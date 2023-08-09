@@ -57,7 +57,7 @@ namespace SweetAcademy.Web.Controllers
 
                 ModelState.AddModelError(
                     key: "StartDate",
-                    errorMessage: $"Date must be at least one day forward from today - ({DateTime.Today.ToString("dd/MM/yyyy")}) !");
+                    errorMessage: $"Date must be at least one day forward from today - ({DateTime.Today:dd/MM/yyyy}) !");
 
                 return View(model);
             }
@@ -71,7 +71,7 @@ namespace SweetAcademy.Web.Controllers
                 ModelState.AddModelError(
                     key: "StartDate",
                     errorMessage: 
-                    $"The Date - ({model.StartDate.Date.ToString("dd/MM/yyyy")}) is already booked for another training! Please select another one or contact Administration");
+                    $"The Date - ({model.StartDate.Date:dd/MM/yyyy}) is already booked for another training! Please select another one or contact Administration");
 
                 return View(model);
             }

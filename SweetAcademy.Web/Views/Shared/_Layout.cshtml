@@ -3,14 +3,13 @@
 @inject IChefService ChefService
 @{
     bool IsChef = false;
-    if (User.Identity!.Name!=null)
+    if (User.Identity!.Name != null)
     {
-        Guid userId =Guid.Parse( User.FindFirstValue(ClaimTypes.NameIdentifier));
-         IsChef = await ChefService.ChefExistByUserIdAsync(userId);
+        Guid userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+        IsChef = await ChefService.ChefExistByUserIdAsync(userId);
     }
-   
-}
 
+}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -44,17 +43,17 @@
                                     <li class="nav-item">
                                         <a class="nav-link text-center text-dark fw-bold bg-primary" asp-area="Admin" asp-controller="Product" asp-action="AllProducts">All Products</a>
                                     </li>
-                                    
+
                                     <li class="nav-item">
                                         <hr />
                                         <a class="nav-link text-center text-dark fw-bold bg-primary" asp-area="Admin" asp-controller="Recipe" asp-action="AllRecipes">All Recipes</a>
                                     </li>
-                                  
+
                                     <li class="nav-item">
                                         <hr>
                                         <a class="nav-link text-center text-dark fw-bold bg-primary" asp-area="Admin" asp-controller="Chef" asp-action="All">All Chefs</a>
                                     </li>
-                                   
+
                                     <li class="nav-item">
                                         <hr>
                                         <a class="nav-link  text-center text-dark fw-bold bg-primary" asp-area="Admin" asp-controller="Training" asp-action="All">All Trainings</a>
@@ -65,24 +64,20 @@
                                 <a class="btn btn-primary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Create New:
                                 </a>
-
                                 <ul class="dropdown-menu fw-bold">
                                     <li class="nav-item">
                                         <a class="nav-link text-center text-dark fw-bold bg-success" asp-area="Admin" asp-controller="Product" asp-action="AddProducts">Add Products</a>
                                     </li>
-                                   
                                     <li class="nav-item">
-                                        <hr/>
+                                        <hr />
                                         <a class="nav-link text-center text-dark fw-bold bg-success" asp-area="" asp-controller="Recipe" asp-action="AddRecipe">Add Recipe</a>
                                     </li>
-                                 
                                     <li class="nav-item">
-                                        <hr/>
+                                        <hr />
                                         <a class="nav-link text-center text-dark fw-bold bg-success" asp-area="Admin" asp-controller="Chef" asp-action="Add">Add Chef</a>
                                     </li>
                                     @if (IsChef)
                                     {
-                                     
                                         <li class="nav-item">
                                             <hr />
                                             <a class="nav-link text-center text-dark fw-bold bg-success" asp-area="Admin" asp-controller="Training" asp-action="Add">Add Training</a>
@@ -90,15 +85,12 @@
                                     }
                                 </ul>
                             </div>
-                         
-                            
                         }
                         else
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark fw-bold border border-5 rounded-pill ms-3" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                             </li>
-
                             <li class="nav-item">
                                 <a class="nav-link text-dark fw-bold border border-5 rounded-pill ms-5" asp-area="" asp-controller="Product" asp-action="AllProducts">All Products</a>
                             </li>
@@ -114,7 +106,7 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark fw-bold border border-5 rounded-pill ms-5" asp-area="" asp-controller="Recipe" asp-action="AddRecipe">Add Recipe</a>
                             </li>
-                            
+
                             if (IsChef)
                             {
                                 <li class="nav-item">
@@ -122,11 +114,6 @@
                                 </li>
                             }
                         }
-                     
-                      
-                      
-
-
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>

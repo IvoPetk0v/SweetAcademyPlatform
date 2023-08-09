@@ -8,7 +8,7 @@ namespace SweetAcademy.Web.Controllers
 {
     public class RecipeController : BaseController
     {
-        private IRecipeService recipeService;
+        private readonly IRecipeService recipeService;
 
         public RecipeController(IRecipeService recipeService)
         {

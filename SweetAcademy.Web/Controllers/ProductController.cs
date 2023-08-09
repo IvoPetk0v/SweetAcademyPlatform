@@ -6,7 +6,7 @@ namespace SweetAcademy.Web.Controllers
 {
     public class ProductController : BaseController
     {
-        private IProductService productService;
+        private readonly IProductService productService;
 
         public ProductController(IProductService product)
         {
