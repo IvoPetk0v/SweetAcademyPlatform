@@ -4,7 +4,7 @@ namespace SweetAcademy.Web.ViewModels.Training
 {
     public class TrainingViewModel
     {
-       
+
         public int Id { get; set; }
 
         public string Name { get; set; } = null!;
@@ -22,6 +22,7 @@ namespace SweetAcademy.Web.ViewModels.Training
 
         public Guid ChefId { get; set; }
 
+        public string ChefFullName { get; set; }
         public virtual Data.Models.Chef Trainer { get; set; } = null!;
     }
 }

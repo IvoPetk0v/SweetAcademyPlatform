@@ -20,13 +20,13 @@
 }
 else
 {
-
     <div class="text-center row">
 
         <div class="card text-center">
             <img style="width: 15rem; text-align: center; margin: auto;" src="@Model.Recipe.ImageUrl" class="card-img-top img-fluid" alt="training image">
             <div class="card-body">
                 <h5 class="card-title mt-1 fs-4 fw-bold">@Model.Name</h5>
+                <h6 class="fs-6 fw-bold"> with Chef @Model.ChefFullName</h6>
                 <br />
                 <label class="text-secondary fw-bold fs-5">Description:</label>
                 <p class="mb-0 fw-bold ">@Model.Recipe.Description</p>

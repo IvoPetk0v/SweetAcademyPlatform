@@ -82,6 +82,7 @@ namespace SweetAcademy.Services.Data
                 Active = training.Active,
                 StartDate = training.StartDate,
                 ChefId = training.ChefId,
+                ChefFullName = training.Trainer.FullName,
                 OpenSeats = training.OpenSeats,
                 Participators = training.Participators,
                 RecipeId = training.RecipeId,

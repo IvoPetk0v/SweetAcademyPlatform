@@ -42,7 +42,7 @@ namespace SweetAcademy.Web.Areas.Admin.Controllers
             }
 
             await this.chefService.AddChefAsync(model);
-            return View();
+            return RedirectToAction("All");
         }
 
         public async Task<IActionResult> All()
@@ -67,7 +67,7 @@ namespace SweetAcademy.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit( Guid id ,ChefViewModel model)
+        public async Task<IActionResult> Edit(Guid id, ChefViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -94,7 +94,7 @@ namespace SweetAcademy.Web.Areas.Admin.Controllers
             }
             catch (Exception e)
             {
-              return BadRequest(e.Message);
+                return BadRequest(e.Message);
             }
         }
 
