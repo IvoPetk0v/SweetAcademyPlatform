@@ -30,7 +30,7 @@ namespace SweetAcademy.Web.Controllers
                 var model = await trainingService.ShowDetailsByIdAsync(id);
                 return View(model);
             }
-            catch (Exception e)
+            catch (Exception )
             {
                 return RedirectToAction("All");
             }

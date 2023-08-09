@@ -12,7 +12,7 @@ namespace SweetAcademy.Web.Areas.Admin.Controllers
         private readonly IRecipeService recipeService;
         private readonly IChefService chefService;
 
-        public TrainingController(ITrainingService service, IRecipeService recipeService,IChefService chefService)
+        public TrainingController(ITrainingService service, IRecipeService recipeService, IChefService chefService)
         {
             this.trainingService = service;
             this.recipeService = recipeService;
@@ -31,7 +31,7 @@ namespace SweetAcademy.Web.Areas.Admin.Controllers
                 var model = await trainingService.ShowDetailsByIdAsync(id);
                 return View(model);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return RedirectToAction("All");
             }
@@ -70,7 +70,7 @@ namespace SweetAcademy.Web.Areas.Admin.Controllers
         {
             var model = new AddTrainingViewModel();
             var allRecipes = await recipeService.GetAllActiveRecipesAsync();
-            var allChefs= await chefService.GetAllChefsAsync();
+            var allChefs = await chefService.GetAllChefsAsync();
             model.Recipes = allRecipes;
             model.Chefs = allChefs;
 

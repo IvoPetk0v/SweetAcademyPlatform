@@ -8,11 +8,11 @@
     ViewBag.Title = "All Trainings";
 
     bool IsChef = false;
-    ChefViewModel chef = null;
+    ChefViewModel chef = null!;
 
-    if (User.Identity.Name != null)
+    if (User.Identity!.Name != null)
     {
-        Guid userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+        Guid userId = Guid.Parse(User!.FindFirstValue(ClaimTypes.NameIdentifier));
         IsChef = await ChefService.ChefExistByUserIdAsync(userId);
         if (IsChef)
         {
@@ -31,8 +31,8 @@
         {
             <div class="row text-center">
                 <div class="col-md-6">
-                    <form class="btn btn-sm position-relative top-10 start-0" asp-area="" asp-controller="Training" asp-action="AllByChef" asp-route-id="@chef.Id" method="get">
-                        <input type="submit" value="Show only owned by Chef, @chef.FullName " class="fs-6 btn-sm btn-success " />
+                    <form class="btn btn-sm position-relative top-10 start-0" asp-area="" asp-controller="Training" asp-action="AllByChef" asp-route-id="@chef!.Id" method="get">
+                        <input type="submit" value="Show only owned by Chef, @chef!.FullName " class="fs-6 btn-sm btn-success " />
                     </form>
                 </div>
                 @if (@ViewBag.IsFilteredByChefId)
@@ -93,7 +93,6 @@
                         <form class="input-group-sm" asp-area="" asp-controller="Training" asp-action="Details" asp-route-id="@training.Id" method="get">
                             <input type="submit" value="Show details" class="fs-6 btn-sm btn-primary " />
                         </form>
-
                     }
                     <br />
                 </div>

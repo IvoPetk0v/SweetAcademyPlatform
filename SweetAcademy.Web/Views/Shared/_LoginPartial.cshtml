@@ -9,8 +9,8 @@
 
 @{
     bool IsChef = false;
-    ChefViewModel chef = null;
-    if (User.Identity.Name != null)
+    ChefViewModel chef = null!;
+    if (User.Identity!.Name != null)
     {
         Guid userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
         IsChef = await ChefService.ChefExistByUserIdAsync(userId);
@@ -27,7 +27,7 @@
         @if (IsChef)
         {
             <li class="nav-item">
-                <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello, Chef @chef.FullName!</a>
+                <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello, Chef @chef!.FullName!</a>
             </li>
         }
         else

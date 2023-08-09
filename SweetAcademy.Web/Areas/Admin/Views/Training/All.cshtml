@@ -7,11 +7,11 @@
     ViewBag.Title = "All Trainings";
 
     bool IsChef = false;
-    ChefViewModel chef = null;
+    ChefViewModel chef = null!;
 
-    if (User.Identity.Name != null)
+    if (User!.Identity!.Name != null)
     {
-        Guid userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+        Guid userId = Guid.Parse(User!.FindFirstValue(ClaimTypes.NameIdentifier));
         IsChef = await ChefService.ChefExistByUserIdAsync(userId);
         if (IsChef)
         {
