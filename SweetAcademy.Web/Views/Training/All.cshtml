@@ -88,6 +88,13 @@
                             </form>
                         }
                     }
+                    else
+                    {
+                        <form class="input-group-sm" asp-area="" asp-controller="Training" asp-action="Details" asp-route-id="@training.Id" method="get">
+                            <input type="submit" value="Show details" class="fs-6 btn-sm btn-primary " />
+                        </form>
+
+                    }
                     <br />
                 </div>
             </div>
