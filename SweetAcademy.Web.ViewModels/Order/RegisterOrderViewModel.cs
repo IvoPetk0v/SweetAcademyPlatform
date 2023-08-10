@@ -11,8 +11,6 @@ namespace SweetAcademy.Web.ViewModels.Order
         [Required]
         public Guid UserId { get; set; }
 
-        public virtual ApplicationUser? User { get; set; } 
-
         [Required]
         public int TrainingId { get; set; }
 

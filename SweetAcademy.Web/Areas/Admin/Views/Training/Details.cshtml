@@ -25,19 +25,19 @@
         </div>
         <div class="row-3">
             @{
-                int seatsLeft = Model.OpenSeats - Model.Participators.Count;
-                if (seatsLeft == 1)
+              
+                if (@Model.SeatsLeft == 1)
                 {
                     <label class="text-secondary fw-bold fs-5">Open seats left:</label>
-                    <p class="mb-0 fw-bold fs-5 text-danger ">There`s only @seatsLeft left.<br /></p>
+                    <p class="mb-0 fw-bold fs-5 text-danger ">There`s only @Model.SeatsLeft left.<br /></p>
 
                     <p class="mb-0 fw-bold text-warning">Someone may take it just now.</p>
                 }
-                else if (seatsLeft > 1)
+                else if (@Model.SeatsLeft > 1)
                 {
                     <label class="text-secondary fw-bold fs-5">Open seats left:</label>
                     <p class="mb-0 fw-bold fs-5 text-success">
-                        There are @seatsLeft seats.
+                        There are @Model.SeatsLeft seats.
                         <br />
                         <br />
                     </p>
@@ -53,7 +53,7 @@
                     <p class="mb-0 fw-bold  fs-5"> <label class="text fs-5">Total price: </label> @Model.TrainingTotalPrice BGN</p>
                 </div>
                 <br />
-                @if (seatsLeft == 0)
+                @if (@Model.SeatsLeft == 0)
                 {
                     <form class="input-group-sm" asp-area="Admin" asp-controller="Order" asp-action="Register" method="get" asp-route-id="@Model.Id">
                         <input disabled="" type="submit" value="Book your seat for the training" class="fs-6 btn-lg btn-disabled " />

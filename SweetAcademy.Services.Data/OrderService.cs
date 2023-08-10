@@ -33,9 +33,8 @@ namespace SweetAcademy.Services.Data
 
             var order = new Order()
             {
-                TrainingId = model.TrainingId,
-                UserId = userId,
-                TotalPrice = model.TotalPrice
+              
+                
 
             };
             await this.dbContext.Orders.AddAsync(order);
@@ -66,14 +65,8 @@ namespace SweetAcademy.Services.Data
                     Name = training.Name,
                     Active = training.Active,
                     OpenSeats = training.OpenSeats,
-                    Participators = training.Orders
-                        .Select(o => new OrderUsersViewModel()
-                        {
-                            TotalPrice = o.TotalPrice,
-                            TrainingId = o.TrainingId,
-                            User = o.User,
-                            UserId = o.User.Id,
-                        }).ToArray(),
+                   SeatsLeft = training.OpenSeats-training.Orders.Count()
+
                 },
                 TrainingId = trainingId,
                 UserId = userId,

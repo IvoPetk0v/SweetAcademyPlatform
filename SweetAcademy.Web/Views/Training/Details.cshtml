@@ -37,7 +37,7 @@ else
             </div>
             <div class="row-3">
                 @{
-                    int seatsLeft = Model.OpenSeats - Model.Participators.Count;
+                    int seatsLeft = Model.OpenSeats - @Model.SeatsLeft;
                     if (seatsLeft == 1)
                     {
                         <label class="text-secondary fw-bold fs-5">Open seats left:</label>

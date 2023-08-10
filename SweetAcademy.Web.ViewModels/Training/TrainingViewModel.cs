@@ -18,14 +18,13 @@ namespace SweetAcademy.Web.ViewModels.Training
         public int RecipeId { get; set; }
 
         public ShowRecipeViewModel Recipe { get; set; } = null!;
-        public  ICollection<OrderUsersViewModel> Participators { get; set; } = null!;
+        public int SeatsLeft { get; set; }
 
         public bool Active { get; set; }
 
         public Guid ChefId { get; set; }
 
-        public string ChefFullName { get; set; }=null!;
-        public  ChefViewModel Trainer { get; set; } = null!;
+        public string ChefFullName { get; set; } = null!;
 
         public decimal TrainingTotalPrice { get; set; }
     }

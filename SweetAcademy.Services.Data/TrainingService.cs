@@ -35,40 +35,13 @@ namespace SweetAcademy.Services.Data
                     {
                         Active = t.Recipe.Active,
                         Description = t.Recipe.Description,
-                        Products = t.Recipe.RecipeProducts.Select(p => new ProductViewModel()
-                        {
-                            Price = p.Product.Price,
-                            Active = p.Product.Active,
-                            Id = p.ProductId,
-                            Name = p.Product.Name,
-                            Quantity = p.Quantity
-                        }).ToArray(),
                         ImageUrl = t.Recipe.ImageUrl,
-                    },
-                    Trainer = new ChefViewModel()
-                    {
-                        Id = t.Trainer.Id,
-                        ApplicationUserId = t.Trainer.ApplicationUserId,
-                        FullName = t.Trainer.FullName,
-                        Active = t.Trainer.Active,
-                        TaxPerTrainingForStudent = t.Trainer.TaxPerTrainingForStudent,
-                        CouchingSession = t.Trainer.CouchingSession,
-                        PhoneNumber = "+359" + t.Trainer.PhoneNumber.ToString(),
-                        Email = t.Trainer.User.UserName
                     },
                     Active = t.Active,
                     StartDate = t.StartDate,
                     ChefId = t.ChefId,
                     OpenSeats = t.OpenSeats,
-                    Participators = t.Orders.Select(o => new OrderUsersViewModel()
-                    {
-                        TotalPrice = o.TotalPrice,
-                        User = o.User,
-                        TrainingId = o.TrainingId,
-                        UserId = o.UserId
-
-                    }).ToArray(),
-                    RecipeId = t.RecipeId
+                    SeatsLeft = t.OpenSeats - t.Orders.Count()
                 }).ToArrayAsync();
 
             return model;
@@ -88,40 +61,12 @@ namespace SweetAcademy.Services.Data
                     {
                         Active = t.Recipe.Active,
                         Description = t.Recipe.Description,
-                        Products = t.Recipe.RecipeProducts.Select(p => new ProductViewModel()
-                        {
-                            Price = p.Product.Price,
-                            Active = p.Product.Active,
-                            Id = p.ProductId,
-                            Name = p.Product.Name,
-                            Quantity = p.Quantity
-                        }).ToArray(),
                         ImageUrl = t.Recipe.ImageUrl,
-                    },
-                    Trainer = new ChefViewModel()
-                    {
-                        Id = t.Trainer.Id,
-                        ApplicationUserId = t.Trainer.ApplicationUserId,
-                        FullName = t.Trainer.FullName,
-                        Active = t.Trainer.Active,
-                        TaxPerTrainingForStudent = t.Trainer.TaxPerTrainingForStudent,
-                        CouchingSession = t.Trainer.CouchingSession,
-                        PhoneNumber = "+359" + t.Trainer.PhoneNumber.ToString(),
-                        Email = t.Trainer.User.UserName
                     },
                     Active = t.Active,
                     StartDate = t.StartDate,
                     ChefId = t.ChefId,
-                    OpenSeats = t.OpenSeats,
-                    Participators = t.Orders.Select(o => new OrderUsersViewModel()
-                    {
-                        TotalPrice = o.TotalPrice,
-                        User = o.User,
-                        TrainingId = o.TrainingId,
-                        UserId = o.UserId
-
-                    }).ToArray(),
-                    RecipeId = t.RecipeId
+                    OpenSeats = t.OpenSeats
                 }).ToArrayAsync();
 
             return model;
@@ -147,14 +92,6 @@ namespace SweetAcademy.Services.Data
                 {
                     Active = training.Recipe.Active,
                     Description = training.Recipe.Description,
-                    Products = training.Recipe.RecipeProducts.Select(p => new ProductViewModel()
-                    {
-                        Price = p.Product.Price,
-                        Active = p.Product.Active,
-                        Id = p.ProductId,
-                        Name = p.Product.Name,
-                        Quantity = p.Quantity
-                    }).ToArray(),
                     ImageUrl = training.Recipe.ImageUrl,
                 },
                 Active = training.Active,
@@ -162,27 +99,8 @@ namespace SweetAcademy.Services.Data
                 ChefId = training.ChefId,
                 ChefFullName = training.Trainer.FullName,
                 OpenSeats = training.OpenSeats,
-                Participators = training.Orders.Select(o => new OrderUsersViewModel()
-                {
-                    TotalPrice = o.TotalPrice,
-                    User = o.User,
-                    TrainingId = o.TrainingId,
-                    UserId = o.UserId
-
-                }).ToArray(),
                 RecipeId = training.RecipeId,
-                Trainer = new ChefViewModel()
-                {
-                    Id = training.Trainer.Id,
-                    ApplicationUserId = training.Trainer.ApplicationUserId,
-                    FullName = training.Trainer.FullName,
-                    Active = training.Trainer.Active,
-                    TaxPerTrainingForStudent = training.Trainer.TaxPerTrainingForStudent,
-                    CouchingSession = training.Trainer.CouchingSession,
-                    PhoneNumber = "+359" + training.Trainer.PhoneNumber.ToString(),
-                  
-                },
-                TrainingTotalPrice = decimal.Round((training.Recipe.RecipeProducts.Sum(rp=>rp.Product.Price * rp.Quantity) + training.Trainer.TaxPerTrainingForStudent) * PlatformInterestForTrainingSession,2, MidpointRounding.AwayFromZero)
+                TrainingTotalPrice = decimal.Round((training.Recipe.RecipeProducts.Sum(rp => rp.Product.Price * rp.Quantity) + training.Trainer.TaxPerTrainingForStudent) * PlatformInterestForTrainingSession, 2, MidpointRounding.AwayFromZero)
             };
             return model;
         }
@@ -250,26 +168,15 @@ namespace SweetAcademy.Services.Data
                     Name = t.Name,
                     Recipe = new ShowRecipeViewModel()
                     {
-                        Active = t.Recipe.Active, 
+                        Active = t.Recipe.Active,
                         Description = t.Recipe.Description,
-                        Products = t.Recipe.RecipeProducts
-                            .Select(p => new ProductViewModel()
-                            {
-                                Price = p.Product.Price,
-                                Active = p.Product.Active,
-                                Id = p.ProductId,
-                                Name = p.Product.Name,
-                                Quantity = p.Quantity
-                            }).ToArray(),
                         ImageUrl = t.Recipe.ImageUrl,
                     },
-                    Trainer = new ChefViewModel() { Id = t.Trainer.Id, ApplicationUserId = t.Trainer.ApplicationUserId, FullName = t.Trainer.FullName, Active = t.Trainer.Active, TaxPerTrainingForStudent = t.Trainer.TaxPerTrainingForStudent, CouchingSession = t.Trainer.CouchingSession, PhoneNumber = "+359" + t.Trainer.PhoneNumber.ToString(), Email = t.Trainer.User.UserName },
                     Active = t.Active,
                     StartDate = t.StartDate,
                     ChefId = t.ChefId,
                     OpenSeats = t.OpenSeats,
-                    Participators = t.Orders.Select(o => new OrderUsersViewModel() { TotalPrice = o.TotalPrice, User = o.User, TrainingId = o.TrainingId, UserId = o.UserId }).ToArray(),
-                    RecipeId = t.RecipeId
+                  
                 }).OrderByDescending(t => t.Active).ThenBy(t => t.StartDate.Date).ToArrayAsync();
 
             return model;
