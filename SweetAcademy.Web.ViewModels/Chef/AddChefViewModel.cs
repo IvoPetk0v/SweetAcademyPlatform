@@ -1,6 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-using SweetAcademy.Data.Models;
+﻿using System.ComponentModel.DataAnnotations;
+
 using SweetAcademy.Web.ViewModels.User;
 using static SweetAcademy.Common.EntityValidationConstants.Chef;
 

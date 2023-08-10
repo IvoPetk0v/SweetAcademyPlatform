@@ -1,10 +1,14 @@
-﻿using System.Data;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Diagnostics;
+﻿using Microsoft.EntityFrameworkCore;
+
 using SweetAcademy.Data;
 using SweetAcademy.Data.Models;
 using SweetAcademy.Services.Data.Interfaces;
+using SweetAcademy.Web.ViewModels.Chef;
+using SweetAcademy.Web.ViewModels.Order;
+using SweetAcademy.Web.ViewModels.Product;
+using SweetAcademy.Web.ViewModels.Recipe;
 using SweetAcademy.Web.ViewModels.Training;
+using static SweetAcademy.Common.GeneralApplicationConstants;
 
 namespace SweetAcademy.Services.Data
 {
@@ -18,25 +22,55 @@ namespace SweetAcademy.Services.Data
 
         public async Task<ICollection<TrainingViewModel>> GetAllActiveTrainingAsync()
         {
-         
+
             var model = await dbContext.Trainings.Where(t => t.Active)
                 .Include(t => t.Recipe)
                 .ThenInclude(t => t.RecipeProducts)
-                .Include(t=>t.Trainer)
+                .Include(t => t.Trainer)
                 .Select(t => new TrainingViewModel()
                 {
                     Id = t.Id,
                     Name = t.Name,
-                    Recipe = t.Recipe,
-                    Trainer = t.Trainer,
+                    Recipe = new ShowRecipeViewModel()
+                    {
+                        Active = t.Recipe.Active,
+                        Description = t.Recipe.Description,
+                        Products = t.Recipe.RecipeProducts.Select(p => new ProductViewModel()
+                        {
+                            Price = p.Product.Price,
+                            Active = p.Product.Active,
+                            Id = p.ProductId,
+                            Name = p.Product.Name,
+                            Quantity = p.Quantity
+                        }).ToArray(),
+                        ImageUrl = t.Recipe.ImageUrl,
+                    },
+                    Trainer = new ChefViewModel()
+                    {
+                        Id = t.Trainer.Id,
+                        ApplicationUserId = t.Trainer.ApplicationUserId,
+                        FullName = t.Trainer.FullName,
+                        Active = t.Trainer.Active,
+                        TaxPerTrainingForStudent = t.Trainer.TaxPerTrainingForStudent,
+                        CouchingSession = t.Trainer.CouchingSession,
+                        PhoneNumber = "+359" + t.Trainer.PhoneNumber.ToString(),
+                        Email = t.Trainer.User.UserName
+                    },
                     Active = t.Active,
                     StartDate = t.StartDate,
                     ChefId = t.ChefId,
                     OpenSeats = t.OpenSeats,
-                    Participators = t.Participators,
+                    Participators = t.Orders.Select(o => new OrderUsersViewModel()
+                    {
+                        TotalPrice = o.TotalPrice,
+                        User = o.User,
+                        TrainingId = o.TrainingId,
+                        UserId = o.UserId
+
+                    }).ToArray(),
                     RecipeId = t.RecipeId
                 }).ToArrayAsync();
-         
+
             return model;
         }
         public async Task<ICollection<TrainingViewModel>> GetAllTrainingAsync()
@@ -50,13 +84,43 @@ namespace SweetAcademy.Services.Data
                 {
                     Id = t.Id,
                     Name = t.Name,
-                    Recipe = t.Recipe,
-                    Trainer = t.Trainer,
+                    Recipe = new ShowRecipeViewModel()
+                    {
+                        Active = t.Recipe.Active,
+                        Description = t.Recipe.Description,
+                        Products = t.Recipe.RecipeProducts.Select(p => new ProductViewModel()
+                        {
+                            Price = p.Product.Price,
+                            Active = p.Product.Active,
+                            Id = p.ProductId,
+                            Name = p.Product.Name,
+                            Quantity = p.Quantity
+                        }).ToArray(),
+                        ImageUrl = t.Recipe.ImageUrl,
+                    },
+                    Trainer = new ChefViewModel()
+                    {
+                        Id = t.Trainer.Id,
+                        ApplicationUserId = t.Trainer.ApplicationUserId,
+                        FullName = t.Trainer.FullName,
+                        Active = t.Trainer.Active,
+                        TaxPerTrainingForStudent = t.Trainer.TaxPerTrainingForStudent,
+                        CouchingSession = t.Trainer.CouchingSession,
+                        PhoneNumber = "+359" + t.Trainer.PhoneNumber.ToString(),
+                        Email = t.Trainer.User.UserName
+                    },
                     Active = t.Active,
                     StartDate = t.StartDate,
                     ChefId = t.ChefId,
                     OpenSeats = t.OpenSeats,
-                    Participators = t.Participators,
+                    Participators = t.Orders.Select(o => new OrderUsersViewModel()
+                    {
+                        TotalPrice = o.TotalPrice,
+                        User = o.User,
+                        TrainingId = o.TrainingId,
+                        UserId = o.UserId
+
+                    }).ToArray(),
                     RecipeId = t.RecipeId
                 }).ToArrayAsync();
 
@@ -67,26 +131,58 @@ namespace SweetAcademy.Services.Data
             var training = await dbContext.Trainings
                 .Include(t => t.Recipe)
                 .ThenInclude(t => t.RecipeProducts)
-                .ThenInclude(t=>t.Product)
+                .ThenInclude(t => t.Product)
                 .Include(t => t.Trainer)
                 .FirstOrDefaultAsync(t => t.Id == id);
             if (training == null)
             {
                 throw new ArgumentOutOfRangeException();
             }
+
             var model = new TrainingViewModel()
             {
                 Id = training.Id,
                 Name = training.Name,
-                Recipe = training.Recipe,
+                Recipe = new ShowRecipeViewModel()
+                {
+                    Active = training.Recipe.Active,
+                    Description = training.Recipe.Description,
+                    Products = training.Recipe.RecipeProducts.Select(p => new ProductViewModel()
+                    {
+                        Price = p.Product.Price,
+                        Active = p.Product.Active,
+                        Id = p.ProductId,
+                        Name = p.Product.Name,
+                        Quantity = p.Quantity
+                    }).ToArray(),
+                    ImageUrl = training.Recipe.ImageUrl,
+                },
                 Active = training.Active,
                 StartDate = training.StartDate,
                 ChefId = training.ChefId,
                 ChefFullName = training.Trainer.FullName,
                 OpenSeats = training.OpenSeats,
-                Participators = training.Participators,
+                Participators = training.Orders.Select(o => new OrderUsersViewModel()
+                {
+                    TotalPrice = o.TotalPrice,
+                    User = o.User,
+                    TrainingId = o.TrainingId,
+                    UserId = o.UserId
+
+                }).ToArray(),
                 RecipeId = training.RecipeId,
-                Trainer = training.Trainer
+                Trainer = new ChefViewModel()
+                {
+                    Id = training.Trainer.Id,
+                    ApplicationUserId = training.Trainer.ApplicationUserId,
+                    FullName = training.Trainer.FullName,
+                    Active = training.Trainer.Active,
+                    TaxPerTrainingForStudent = training.Trainer.TaxPerTrainingForStudent,
+                    CouchingSession = training.Trainer.CouchingSession,
+                    PhoneNumber = "+359" + training.Trainer.PhoneNumber.ToString(),
+                  
+                },
+                TrainingTotalPrice = decimal.Round((training.Recipe.RecipeProducts.Sum(rp=>rp.Product.Price * rp.Quantity) + training.Trainer.TaxPerTrainingForStudent) * PlatformInterestForTrainingSession,2, MidpointRounding.AwayFromZero)
             };
             return model;
         }
@@ -134,17 +230,17 @@ namespace SweetAcademy.Services.Data
         public async Task<ICollection<DateTime>> GetTrainingDateAsync()
         {
 
-            var dates= await dbContext.Trainings
+            var dates = await dbContext.Trainings
                 .Where(t => t.Active)
                 .Select(t => t.StartDate.Date)
                 .ToArrayAsync();
             return dates;
-         
+
         }
 
         public async Task<ICollection<TrainingViewModel>> AllByChef(Guid chefId)
         {
-            var model = await dbContext.Trainings.Where(t=>t.ChefId==chefId)
+            var model = await dbContext.Trainings.Where(t => t.ChefId == chefId)
                 .Include(t => t.Recipe)
                 .ThenInclude(t => t.RecipeProducts)
                 .Include(t => t.Trainer)
@@ -152,15 +248,29 @@ namespace SweetAcademy.Services.Data
                 {
                     Id = t.Id,
                     Name = t.Name,
-                    Recipe = t.Recipe,
-                    Trainer = t.Trainer,
+                    Recipe = new ShowRecipeViewModel()
+                    {
+                        Active = t.Recipe.Active, 
+                        Description = t.Recipe.Description,
+                        Products = t.Recipe.RecipeProducts
+                            .Select(p => new ProductViewModel()
+                            {
+                                Price = p.Product.Price,
+                                Active = p.Product.Active,
+                                Id = p.ProductId,
+                                Name = p.Product.Name,
+                                Quantity = p.Quantity
+                            }).ToArray(),
+                        ImageUrl = t.Recipe.ImageUrl,
+                    },
+                    Trainer = new ChefViewModel() { Id = t.Trainer.Id, ApplicationUserId = t.Trainer.ApplicationUserId, FullName = t.Trainer.FullName, Active = t.Trainer.Active, TaxPerTrainingForStudent = t.Trainer.TaxPerTrainingForStudent, CouchingSession = t.Trainer.CouchingSession, PhoneNumber = "+359" + t.Trainer.PhoneNumber.ToString(), Email = t.Trainer.User.UserName },
                     Active = t.Active,
                     StartDate = t.StartDate,
                     ChefId = t.ChefId,
                     OpenSeats = t.OpenSeats,
-                    Participators = t.Participators,
+                    Participators = t.Orders.Select(o => new OrderUsersViewModel() { TotalPrice = o.TotalPrice, User = o.User, TrainingId = o.TrainingId, UserId = o.UserId }).ToArray(),
                     RecipeId = t.RecipeId
-                }).OrderByDescending(t=>t.Active).ThenBy(t=>t.StartDate.Date).ToArrayAsync();
+                }).OrderByDescending(t => t.Active).ThenBy(t => t.StartDate.Date).ToArrayAsync();
 
             return model;
         }

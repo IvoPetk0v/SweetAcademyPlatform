@@ -47,24 +47,15 @@
                 {
                     <label class="text-warning fw-bold fs-5">There is no Open seats left.</label>
                     <p>Please check again, these days will appear same event or try to book another one.</p>
-
                 }
-
-                decimal recipeTotalPrice = Model.Recipe.RecipeProducts
-                .Sum(rp => rp.Product.Price * (decimal)rp.Quantity);
-
-                decimal totalPrice =
-                (recipeTotalPrice + Model.Trainer.TaxPerTrainingForStudent) * PlatformInterestForTrainingSession;
-
-                totalPrice = decimal.Round(totalPrice, 2, MidpointRounding.AwayFromZero);
                 <br />
                 <div>
-                    <p class="mb-0 fw-bold  fs-5"> <label class="text fs-5">Total price: </label> @totalPrice BGN</p>
+                    <p class="mb-0 fw-bold  fs-5"> <label class="text fs-5">Total price: </label> @Model.TrainingTotalPrice BGN</p>
                 </div>
                 <br />
                 @if (seatsLeft == 0)
                 {
-                    <form class="input-group-sm" asp-area="Admin" asp-controller="Order" asp-action="Register" method="post" asp-route-id="@Model.Id">
+                    <form class="input-group-sm" asp-area="Admin" asp-controller="Order" asp-action="Register" method="get" asp-route-id="@Model.Id">
                         <input disabled="" type="submit" value="Book your seat for the training" class="fs-6 btn-lg btn-disabled " />
                     </form>
                 }

@@ -9,7 +9,7 @@ namespace SweetAcademy.Data.Models
     {
         public Training()
         {
-            this.Participators = new HashSet<ApplicationUser>();
+            this.Orders = new HashSet<Order>();
         }
         [Key] public int Id { get; set; }
 
@@ -28,7 +28,7 @@ namespace SweetAcademy.Data.Models
 
         [ForeignKey(nameof(RecipeId))] 
         public virtual Recipe Recipe { get; set; } = null!;
-        public virtual ICollection<ApplicationUser> Participators { get; set; } =null!;
+        public virtual ICollection<Order> Orders { get; set; } =null!;
 
         [Required]
         public bool Active { get; set; } 

@@ -52,20 +52,12 @@ else
                         <br />
                         <p class="mb-0 fw-bold">You are welcome to join in.</p>
                     }
-
-                    decimal recipeTotalPrice = Model.Recipe.RecipeProducts
-                    .Sum(rp => rp.Product.Price * (decimal)rp.Quantity);
-
-                    decimal totalPrice =
-                    (recipeTotalPrice + Model.Trainer.TaxPerTrainingForStudent) * PlatformInterestForTrainingSession;
-
-                    totalPrice = decimal.Round(totalPrice, 2, MidpointRounding.AwayFromZero);
                     <br />
                     <div>
-                        <p class="mb-0 fw-bold  fs-5"> <label class="text fs-5">Total price: </label> @totalPrice BGN</p>
+                        <p class="mb-0 fw-bold  fs-5"> <label class="text fs-5">Total price: </label> @Model.TrainingTotalPrice BGN</p>
                     </div>
 
-                    <form class="input-group-sm" asp-area="" asp-controller="Order" asp-action="Register" method="post" asp-route-id="@Model.Id">
+                    <form class="input-group-sm" asp-area="" asp-controller="Order" asp-action="Register" method="get" asp-route-id="@Model.Id">
                         <input type="submit" value="Book your seat for the training" class="fs-6 btn-sm btn-success " />
                     </form>
                 }

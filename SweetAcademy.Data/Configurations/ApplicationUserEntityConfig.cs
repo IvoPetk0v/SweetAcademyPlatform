@@ -33,6 +33,7 @@ namespace SweetAcademy.Data.Configurations
         };
         public void Configure(EntityTypeBuilder<ApplicationUser> builder)
         {
+
             builder.HasData(seeds);
         }
     }

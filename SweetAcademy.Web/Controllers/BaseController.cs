@@ -7,13 +7,13 @@ namespace SweetAcademy.Web.Controllers
     [Authorize]
     public class BaseController : Controller
     {
-        private string GetUserId()
+        public Guid GetUserId()
         {
-            string id = string.Empty;
+            Guid id = Guid.Empty;
 
             if (User != null)
             {
-                id = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                id = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
             }
 
             return id;

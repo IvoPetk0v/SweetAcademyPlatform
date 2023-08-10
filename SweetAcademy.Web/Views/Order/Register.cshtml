@@ -1,5 +1,59 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model RegisterOrderViewModel
+
 @{
+    ViewBag.Title = "Order details";
+
+    var training = Model.OrderedTraining;
 }
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+<div class="card-img-top img-fluid" style="width: 15rem; text-align: center; margin: auto;">
+    <img src="@training!.Recipe.ImageUrl" class="card-img-top img-fluid" alt="training image">
+</div>
+<br />
+<div class="row text-center">
+    <div class="row text-center">
+        <h5 class="mt-2 fs-4 fw-bold">@training.Name</h5>
+        <br />
+        <label class="text-secondary fw-bold fs-5">Event starts on:</label>
+        <p class="mb-2 fw-bold fs-5 text-dark">@training.StartDate.ToString("f")</p>
+        <br />
+        <label class=" mb-5 text-dark fw-bold fs-6">Your trainer will be Chef - @training.Trainer.FullName. </label>
+        <br />
+        <div class="text-center">
+            <p class="fs-4 fw-bold"> @(decimal.Round((decimal)Model.TotalPrice, 2, MidpointRounding.AwayFromZero)). BGN</p>
+            <form class="input-group-sm" asp-area="" asp-controller="Order" asp-action="Register" method="post">
+                <input asp-for="@Model.TotalPrice" class="form-control d-none" aria-required="true"value="@Model.TotalPrice"/>
+                <input asp-for="@Model.TrainingId" class="form-control d-none" aria-required="true"value="@Model.TrainingId"/>
+                <input asp-for="@Model.UserId" class="form-control d-none" aria-required="true"value="@Model.UserId"/>
+                <input type="submit" value="Buy now" class="fs-6 btn-sm btn-primary " disabled="" id="BuyBtn"/>
+            </form>
+            <br />
+            <div class="form-check form-switch d-inline-flex">
+                <div class="row-12">
+                    <input class="form-check-input mb-12" onclick="Toggle(event)" type="checkbox" id="flexSwitchCheckChecked">
+                    <label class="form-check-label text-primary" for="flexSwitchCheckChecked">Are you sure you want make purchase?</label>
+                </div>
+            </div>
+
+            <br />
+        </div>
+
+
+    </div>
+</div>
+
+<script>
+    function Toggle(event) {
+  
+        let isConfirm = document.getElementById("flexSwitchCheckChecked").checked;
+        if (isConfirm) {
+            
+            document.getElementById("BuyBtn").disabled = false;
+        } else {
+            document.getElementById("BuyBtn").disabled = true;
+        }
+    }
+
+</script>

@@ -1,4 +1,6 @@
-﻿using SweetAcademy.Data.Models;
+﻿using SweetAcademy.Web.ViewModels.Chef;
+using SweetAcademy.Web.ViewModels.Order;
+using SweetAcademy.Web.ViewModels.Recipe;
 
 namespace SweetAcademy.Web.ViewModels.Training
 {
@@ -15,14 +17,16 @@ namespace SweetAcademy.Web.ViewModels.Training
 
         public int RecipeId { get; set; }
 
-        public virtual Data.Models.Recipe Recipe { get; set; } = null!;
-        public virtual ICollection<ApplicationUser> Participators { get; set; } = null!;
+        public ShowRecipeViewModel Recipe { get; set; } = null!;
+        public  ICollection<OrderUsersViewModel> Participators { get; set; } = null!;
 
         public bool Active { get; set; }
 
         public Guid ChefId { get; set; }
 
-        public string ChefFullName { get; set; }
-        public virtual Data.Models.Chef Trainer { get; set; } = null!;
+        public string ChefFullName { get; set; }=null!;
+        public  ChefViewModel Trainer { get; set; } = null!;
+
+        public decimal TrainingTotalPrice { get; set; }
     }
 }
