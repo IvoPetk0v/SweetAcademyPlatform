@@ -37,29 +37,45 @@ else
             </div>
             <div class="row-3">
                 @{
-                    int seatsLeft = Model.OpenSeats - @Model.SeatsLeft;
-                    if (seatsLeft == 1)
+                    if (@Model.SeatsLeft == 1)
                     {
                         <label class="text-secondary fw-bold fs-5">Open seats left:</label>
-                        <p class="mb-0 fw-bold text-danger ">There`s only @seatsLeft left.</p>
-                        <br />
+                        <p class="mb-0 fw-bold fs-5 text-danger ">There`s only @Model.SeatsLeft left.<br /></p>
+
                         <p class="mb-0 fw-bold text-warning">Someone may take it just now.</p>
+                    }
+                    else if (@Model.SeatsLeft > 1)
+                    {
+                        <label class="text-secondary fw-bold fs-5">Open seats left:</label>
+                        <p class="mb-0 fw-bold fs-5 text-success">
+                            There are @Model.SeatsLeft seats.
+                            <br />
+                            <br />
+                        </p>
+                        <p class="mb-0 fw-bold">You are more than welcome to join and cook with us. Book your seat click on button below.</p>
                     }
                     else
                     {
-                        <label class="text-secondary fw-bold fs-5">Open seats left:</label>
-                        <p class="mb-0 fw-bold text-success"> There are @seatsLeft seats.</p>
-                        <br />
-                        <p class="mb-0 fw-bold">You are welcome to join in.</p>
+                        <label class="text-warning fw-bold fs-5">There is no Open seats left.</label>
+                        <p>Please check again, these days will appear same event or try to book another one.</p>
                     }
                     <br />
                     <div>
                         <p class="mb-0 fw-bold  fs-5"> <label class="text fs-5">Total price: </label> @Model.TrainingTotalPrice BGN</p>
                     </div>
-
-                    <form class="input-group-sm" asp-area="" asp-controller="Order" asp-action="Register" method="get" asp-route-id="@Model.Id">
-                        <input type="submit" value="Book your seat for the training" class="fs-6 btn-sm btn-success " />
-                    </form>
+                    <br />
+                    @if (@Model.SeatsLeft == 0)
+                    {
+                        <form class="input-group-sm" asp-area="" asp-controller="Order" asp-action="Register" method="get" asp-route-id="@Model.Id">
+                            <input disabled="" type="submit" value="Book your seat for the training" class="fs-6 btn-lg btn-disabled " />
+                        </form>
+                    }
+                    else
+                    {
+                        <form class="input-group-sm" asp-area="" asp-controller="Order" asp-action="Register" method="get" asp-route-id="@Model.Id">
+                            <input type="submit" value="Book your seat for the training" class="fs-6 btn-lg btn-success " />
+                        </form>
+                    }
                 }
 
                 <br />

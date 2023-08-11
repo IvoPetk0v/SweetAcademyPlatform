@@ -34,51 +34,63 @@
                     <ul class="navbar-nav flex-grow-1">
                         @if (User.IsInRole(RoleAdminName))
                         {
-                            <div class="dropdown ms-5 mt-3 mb-3">
-                                <a class="btn btn-primary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Show All:
-                                </a>
-
-                                <ul class="dropdown-menu fw-bold border border-dark bg-primary">
-                                    <li class="nav-item border border-dark">
-                                        <a class="nav-link text-center text-white fw-bold bg-primary" asp-area="Admin" asp-controller="Product" asp-action="AllProducts">All Products</a>
-                                    </li>
-
-                                    <li class="nav-item border border-dark">
-                                        <a class="nav-link text-center text-white fw-bold bg-primary" asp-area="Admin" asp-controller="Recipe" asp-action="AllRecipes">All Recipes</a>
-                                    </li>
-
-                                    <li class="nav-item border border-dark">
-                                        <a class="nav-link text-center text-white fw-bold bg-primary" asp-area="Admin" asp-controller="Chef" asp-action="All">All Chefs</a>
-                                    </li>
-
-                                    <li class="nav-item border border-dark">
-                                        <a class="nav-link  text-center text-white fw-bold bg-primary" asp-area="Admin" asp-controller="Training" asp-action="All">All Trainings</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="dropdown ms-5 mt-3 mb-3">
-                                <a class="btn btn-primary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Create New:
-                                </a>
-                                <ul class="dropdown-menu fw-bold border border-dark border bg-success ">
-                                    <li class="nav-item border border-dark">
-                                        <a class="nav-link text-center text-white fw-bold bg-success" asp-area="Admin" asp-controller="Product" asp-action="AddProducts">Add Products</a>
-                                    </li>
-                                    <li class="nav-item border border-dark">
-                                        <a class="nav-link text-center text-white fw-bold bg-success" asp-area="" asp-controller="Recipe" asp-action="AddRecipe">Add Recipe</a>
-                                    </li>
-                                    <li class="nav-item border border-dark">
-                                        <a class="nav-link text-center text-white fw-bold bg-success" asp-area="Admin" asp-controller="Chef" asp-action="Add">Add Chef</a>
-                                    </li>
-                                    @if (IsChef)
-                                    {
+                            <li>
+                                <div class="dropdown ms-5 mt-3 mb-3">
+                                    <a class="btn btn-primary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Show All:
+                                    </a>
+                                    <ul class="dropdown-menu fw-bold border border-dark bg-primary">
                                         <li class="nav-item border border-dark">
-                                            <a class="nav-link text-center text-white fw-bold bg-success" asp-area="Admin" asp-controller="Training" asp-action="Add">Add Training</a>
+                                            <a class="nav-link text-center text-white fw-bold bg-primary" asp-area="Admin" asp-controller="Product" asp-action="AllProducts">All Products</a>
                                         </li>
-                                    }
-                                </ul>
-                            </div>
+
+                                        <li class="nav-item border border-dark">
+                                            <a class="nav-link text-center text-white fw-bold bg-primary" asp-area="Admin" asp-controller="Recipe" asp-action="AllRecipes">All Recipes</a>
+                                        </li>
+
+                                        <li class="nav-item border border-dark">
+                                            <a class="nav-link text-center text-white fw-bold bg-primary" asp-area="Admin" asp-controller="Chef" asp-action="All">All Chefs</a>
+                                        </li>
+
+                                        <li class="nav-item border border-dark">
+                                            <a class="nav-link  text-center text-white fw-bold bg-primary" asp-area="Admin" asp-controller="Training" asp-action="All">All Trainings</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="dropdown ms-5 mt-3 mb-3">
+                                    <a class="btn btn-primary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Create New:
+                                    </a>
+                                    <ul class="dropdown-menu fw-bold border border-dark border bg-success ">
+                                        <li class="nav-item border border-dark">
+                                            <a class="nav-link text-center text-white fw-bold bg-success" asp-area="Admin" asp-controller="Product" asp-action="AddProducts">Add Products</a>
+                                        </li>
+                                        <li class="nav-item border border-dark">
+                                            <a class="nav-link text-center text-white fw-bold bg-success" asp-area="" asp-controller="Recipe" asp-action="AddRecipe">Add Recipe</a>
+                                        </li>
+                                        <li class="nav-item border border-dark">
+                                            <a class="nav-link text-center text-white fw-bold bg-success" asp-area="Admin" asp-controller="Chef" asp-action="Add">Add Chef</a>
+                                        </li>
+                                        @if (IsChef)
+                                        {
+                                            <li class="nav-item border border-dark">
+                                                <a class="nav-link text-center text-white fw-bold bg-success" asp-area="Admin" asp-controller="Training" asp-action="Add">Add Training</a>
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
+                            </li>
+                        
+                            <li>
+                                <div class="dropdown ms-5 mt-3 mb-3">
+                                    <a class="btn btn-success " role="button" asp-area="" asp-controller="Order" asp-action="OrderList">
+                                        My Orders
+                                    </a>
+                                </div>
+                            </li>
+                          
                         }
                         else
                         {
@@ -107,6 +119,9 @@
                                     <a class="nav-link text-dark fw-bold border border-5 rounded-pill" asp-area="" asp-controller="Training" asp-action="Add">Add Training</a>
                                 </li>
                             }
+                            <li class="nav-item">
+                                <a class="nav-link text-dark fw-bold border border-5 rounded-pill ms-5" asp-area="" asp-controller="Order" asp-action="OrderList">My Orders</a>
+                            </li>
                         }
                     </ul>
                     <partial name="_LoginPartial" />

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Net;
+using Microsoft.AspNetCore.Mvc;
 using SweetAcademy.Services.Data.Interfaces;
 using SweetAcademy.Web.ViewModels.Order;
 
@@ -20,7 +21,7 @@ namespace SweetAcademy.Web.Controllers
             var model = new RegisterOrderViewModel();
             try
             {
-                 model = await orderService.LoadOrderInfoAsync(id, userId);
+                model = await orderService.LoadOrderInfoAsync(id, userId);
             }
             catch (Exception)
             {
@@ -42,8 +43,7 @@ namespace SweetAcademy.Web.Controllers
             try
             {
                 await orderService.CreateAnOrderAsync(model, userId);
-                return Ok();
-                // return RedirectToAction("OrderList");
+                return RedirectToAction("OrderList");
             }
             catch (Exception e)
             {
@@ -53,9 +53,10 @@ namespace SweetAcademy.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult OrderList()
+        public async Task<IActionResult> OrderList()
         {
-            return View();
+            var model = await orderService.LoadOrdersListItemsAsync(this.GetUserId());
+            return View(model);
         }
     }
 }

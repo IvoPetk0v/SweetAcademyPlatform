@@ -6,5 +6,7 @@ namespace SweetAcademy.Services.Data.Interfaces
     {
         public Task CreateAnOrderAsync(RegisterOrderViewModel model, Guid userId);
         public Task<RegisterOrderViewModel> LoadOrderInfoAsync(int trainingId, Guid userId);
+
+        public Task<ICollection<OrdersUserViewModel>> LoadOrdersListItemsAsync(Guid userId);
     }
 }

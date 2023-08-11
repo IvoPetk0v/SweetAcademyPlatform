@@ -3,9 +3,6 @@
 using SweetAcademy.Data;
 using SweetAcademy.Data.Models;
 using SweetAcademy.Services.Data.Interfaces;
-using SweetAcademy.Web.ViewModels.Chef;
-using SweetAcademy.Web.ViewModels.Order;
-using SweetAcademy.Web.ViewModels.Product;
 using SweetAcademy.Web.ViewModels.Recipe;
 using SweetAcademy.Web.ViewModels.Training;
 using static SweetAcademy.Common.GeneralApplicationConstants;
@@ -25,8 +22,6 @@ namespace SweetAcademy.Services.Data
 
             var model = await dbContext.Trainings.Where(t => t.Active)
                 .Include(t => t.Recipe)
-                .ThenInclude(t => t.RecipeProducts)
-                .Include(t => t.Trainer)
                 .Select(t => new TrainingViewModel()
                 {
                     Id = t.Id,
@@ -39,9 +34,6 @@ namespace SweetAcademy.Services.Data
                     },
                     Active = t.Active,
                     StartDate = t.StartDate,
-                    ChefId = t.ChefId,
-                    OpenSeats = t.OpenSeats,
-                    SeatsLeft = t.OpenSeats - t.Orders.Count()
                 }).ToArrayAsync();
 
             return model;
@@ -51,8 +43,6 @@ namespace SweetAcademy.Services.Data
 
             var model = await dbContext.Trainings
                 .Include(t => t.Recipe)
-                .ThenInclude(t => t.RecipeProducts)
-                .Include(t => t.Trainer)
                 .Select(t => new TrainingViewModel()
                 {
                     Id = t.Id,
@@ -65,8 +55,6 @@ namespace SweetAcademy.Services.Data
                     },
                     Active = t.Active,
                     StartDate = t.StartDate,
-                    ChefId = t.ChefId,
-                    OpenSeats = t.OpenSeats
                 }).ToArrayAsync();
 
             return model;
@@ -78,6 +66,7 @@ namespace SweetAcademy.Services.Data
                 .ThenInclude(t => t.RecipeProducts)
                 .ThenInclude(t => t.Product)
                 .Include(t => t.Trainer)
+                .Include(t => t.Orders)
                 .FirstOrDefaultAsync(t => t.Id == id);
             if (training == null)
             {
@@ -100,7 +89,8 @@ namespace SweetAcademy.Services.Data
                 ChefFullName = training.Trainer.FullName,
                 OpenSeats = training.OpenSeats,
                 RecipeId = training.RecipeId,
-                TrainingTotalPrice = decimal.Round((training.Recipe.RecipeProducts.Sum(rp => rp.Product.Price * rp.Quantity) + training.Trainer.TaxPerTrainingForStudent) * PlatformInterestForTrainingSession, 2, MidpointRounding.AwayFromZero)
+                TrainingTotalPrice = decimal.Round((training.Recipe.RecipeProducts.Sum(rp => rp.Product.Price * rp.Quantity) + training.Trainer.TaxPerTrainingForStudent) * PlatformInterestForTrainingSession, 2, MidpointRounding.AwayFromZero),
+                SeatsLeft = training.OpenSeats - training.Orders.Count
             };
             return model;
         }
@@ -160,8 +150,6 @@ namespace SweetAcademy.Services.Data
         {
             var model = await dbContext.Trainings.Where(t => t.ChefId == chefId)
                 .Include(t => t.Recipe)
-                .ThenInclude(t => t.RecipeProducts)
-                .Include(t => t.Trainer)
                 .Select(t => new TrainingViewModel()
                 {
                     Id = t.Id,
@@ -175,9 +163,10 @@ namespace SweetAcademy.Services.Data
                     Active = t.Active,
                     StartDate = t.StartDate,
                     ChefId = t.ChefId,
-                    OpenSeats = t.OpenSeats,
-                  
-                }).OrderByDescending(t => t.Active).ThenBy(t => t.StartDate.Date).ToArrayAsync();
+                    OpenSeats = t.OpenSeats
+                }).OrderByDescending(t => t.Active)
+                .ThenBy(t => t.StartDate.Date)
+                .ToArrayAsync();
 
             return model;
         }

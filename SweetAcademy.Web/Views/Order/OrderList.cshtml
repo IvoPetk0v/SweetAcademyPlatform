@@ -1,0 +1,81 @@
+﻿@model ICollection<OrdersUserViewModel>
+
+@{
+    ViewBag.Title = "All Orders";
+}
+
+<h2 asp-area="" class="text-center">@ViewBag.Title</h2>
+<hr />
+
+
+<div class="text-center row">
+    @if (@Model.Count > 0)
+    {
+        @foreach (var order in @Model)
+        {
+            @if (order.Trainings.StartDate < @DateTime.Today)
+            {
+                <div class="card col-4" style="width: 20rem; ">
+                    <img src="@order.Trainings.Recipe.ImageUrl" class="card-img-top img-fluid" alt="training image">
+                    <div class="card-body">
+                        <h5 class="card-title mt-1 fs-4 fw-bold">@order.Trainings.Name</h5>
+                        <br />
+                        <p class="text-dark fw-bold fs-5">Order costs: @order.TotalPrice BGN</p>
+                        <label class="text-secondary fw-bold fs-5">Event starts on:</label>
+                        <p class="mb-0 fw-bold text-dark">@order.Trainings.StartDate.ToString("f")</p>
+                        <div class="accordion accordion-flush mt-2 mb-2" id="accordionFlush">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="flush-headingOne">
+                                    <button class="accordion-button collapsed border border-dark" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                        <p class="fs-6 fw-bold">Description:</p>
+                                    </button>
+                                </h2>
+                                <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlush">
+                                    <div class="accordion-body">  <p class="mb-0 ">@order.Trainings.Recipe.Description</p></div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="mb-0 text-dark">Cook with Chef - <strong>@order.Trainings.ChefFullName</strong></p>
+                        <p class="mb-0 text-dark">Status of training: <strong> Done. </strong></p>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="card col-4" style="width: 20rem; ">
+                    <img src="@order.Trainings.Recipe.ImageUrl" class="card-img-top img-fluid" alt="training image">
+                    <div class="card-body">
+                        <h5 class="card-title mt-1 fs-4 fw-bold">@order.Trainings.Name</h5>
+                        <br />
+                        <p class="text-dark fw-bold fs-5">Order costs: @order.TotalPrice BGN</p>
+                        <label class="text-secondary fw-bold fs-5">Event starts on:</label>
+                        <p class="mb-0 fw-bold text-dark">@order.Trainings.StartDate.ToString("f")</p>
+                        <div class="accordion accordion-flush mt-2 mb-2" id="accordionFlush">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header position-relative" id="flush-headingOne">
+                                    <button class="accordion-button collapsed border border-dark" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                        <p class="fs-6 fw-bold">Description:</p>
+                                    </button>
+                                </h2>
+                                <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlush">
+                                    <div class="accordion-body">  <p class="mb-0 ">@order.Trainings.Recipe.Description</p></div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="mb-0 text-dark">Cook with Chef - <strong>@order.Trainings.ChefFullName</strong></p>
+                        <p class="mb-0 text-dark">Status of training: <strong>Upcoming soon.</strong></p>
+                    </div>
+                </div>
+
+            }
+        }
+    }
+    else
+    {
+        <p> You have no ordered trainings yet! You may have one from the link below:</p>
+        <form class="input-group-sm" asp-area="" asp-controller="Training" asp-action="All" method="get">
+            <input type="submit" value="View all trainings" class="fs-6 btn-sm btn-primary " />
+        </form>
+    }
+
+</div>
