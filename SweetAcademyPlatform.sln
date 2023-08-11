@@ -17,11 +17,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SweetAcademy.Web.ViewModels
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SweetAcademy.Common", "SweetAcademy.Common\SweetAcademy.Common.csproj", "{057C6ABD-752C-43C3-9568-45BB101C7464}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SweetAcademy.Web.Infrastructure", "SweetAcademy.Web.Infrastructure\SweetAcademy.Web.Infrastructure.csproj", "{13ACBD83-BF8B-4ACD-A82A-8957E6031A46}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SweetAcademy.Web.Infrastructure", "SweetAcademy.Web.Infrastructure\SweetAcademy.Web.Infrastructure.csproj", "{13ACBD83-BF8B-4ACD-A82A-8957E6031A46}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{023D4D1E-E158-4BC5-97AF-4C1A7800515C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SweetAcademy.Services.Data", "SweetAcademy.Services.Data\SweetAcademy.Services.Data.csproj", "{D6220235-DD29-4777-B097-2CED77BAE711}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SweetAcademy.Services.Data", "SweetAcademy.Services.Data\SweetAcademy.Services.Data.csproj", "{D6220235-DD29-4777-B097-2CED77BAE711}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{89708C10-1BCD-4AF9-BAE1-E307FEE37901}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SweetAcademy.Services.Tests", "SweetAcademy.Services.Tests\SweetAcademy.Services.Tests.csproj", "{10F92509-F330-4759-BF61-4D2CD980A892}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +61,10 @@ Global
 		{D6220235-DD29-4777-B097-2CED77BAE711}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D6220235-DD29-4777-B097-2CED77BAE711}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D6220235-DD29-4777-B097-2CED77BAE711}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10F92509-F330-4759-BF61-4D2CD980A892}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10F92509-F330-4759-BF61-4D2CD980A892}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10F92509-F330-4759-BF61-4D2CD980A892}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10F92509-F330-4759-BF61-4D2CD980A892}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -68,6 +76,7 @@ Global
 		{3C6FF6A9-B66E-4751-B7EF-271FB4E9B52A} = {E2B906C8-7D37-48CC-BBCE-9664EA40CF56}
 		{13ACBD83-BF8B-4ACD-A82A-8957E6031A46} = {E2B906C8-7D37-48CC-BBCE-9664EA40CF56}
 		{D6220235-DD29-4777-B097-2CED77BAE711} = {023D4D1E-E158-4BC5-97AF-4C1A7800515C}
+		{10F92509-F330-4759-BF61-4D2CD980A892} = {89708C10-1BCD-4AF9-BAE1-E307FEE37901}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FDE95933-9587-49F5-8F02-7C67C70135AF}
